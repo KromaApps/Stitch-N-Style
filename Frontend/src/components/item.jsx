@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import clothingItems from "../services/api";
 
-const ProductCard = ({ item }) => {
+const ProductCard = ({ item, onAddToCart }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState(item.sizes[0]);
   const [selectedColor, setSelectedColor] = useState(item.colors[0]);
@@ -17,19 +17,7 @@ const ProductCard = ({ item }) => {
   };
 
   const handleAddToCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
-
-    if (existingItem) {
-      existingItem.quantity = (existingItem.quantity || 1) + 1;
-      existingItem.selectedSize = selectedSize;
-      existingItem.selectedColor = selectedColor;
-    } else {
-      cart.push({ ...item, quantity: 1, selectedSize, selectedColor });
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new CustomEvent("cartUpdated"));
+    onAddToCart(item, selectedSize, selectedColor);
   };
 
   return (
@@ -152,11 +140,116 @@ const ProductCard = ({ item }) => {
 };
 
 const Item = () => {
+  const [sortedItems, setSortedItems] = useState(clothingItems);
+  const [sortCriteria, setSortCriteria] = useState("name");
+  const [filterSize, setFilterSize] = useState("");
+  const [filterColor, setFilterColor] = useState("");
+
+  useEffect(() => {
+    let items = [...clothingItems];
+
+    if (filterSize) {
+      items = items.filter((item) => item.sizes.includes(filterSize));
+    }
+
+    if (filterColor) {
+      items = items.filter((item) => item.colors.includes(filterColor));
+    }
+
+    items.sort((a, b) => {
+      if (sortCriteria === "price") {
+        return a.price - b.price;
+      } else if (sortCriteria === "name") {
+        return a.name.localeCompare(b.name);
+      }
+      return 0;
+    });
+
+    setSortedItems(items);
+  }, [sortCriteria, filterSize, filterColor]);
+
+  const handleAddToCart = (item, selectedSize, selectedColor) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+
+    if (existingItem) {
+      existingItem.quantity = (existingItem.quantity || 1) + 1;
+      existingItem.selectedSize = selectedSize;
+      existingItem.selectedColor = selectedColor;
+    } else {
+      cart.push({ ...item, quantity: 1, selectedSize, selectedColor });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.dispatchEvent(new CustomEvent("cartUpdated"));
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {clothingItems.map((item) => (
-        <ProductCard key={item.id} item={item} />
-      ))}
+    <div>
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <label htmlFor="sort" className="mr-2 text-white">
+            Sort by:
+          </label>
+          <select
+            id="sort"
+            value={sortCriteria}
+            onChange={(e) => setSortCriteria(e.target.value)}
+            className="p-2 rounded-md"
+          >
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="filterSize" className="mr-2 text-white">
+            Filter by Size:
+          </label>
+          <select
+            id="filterSize"
+            value={filterSize}
+            onChange={(e) => setFilterSize(e.target.value)}
+            className="p-2 rounded-md"
+          >
+            <option value="">All</option>
+            {Array.from(
+              new Set(clothingItems.flatMap((item) => item.sizes))
+            ).map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="filterColor" className="mr-2 text-white">
+            Filter by Color:
+          </label>
+          <select
+            id="filterColor"
+            value={filterColor}
+            onChange={(e) => setFilterColor(e.target.value)}
+            className="p-2 rounded-md"
+          >
+            <option value="">All</option>
+            {Array.from(
+              new Set(clothingItems.flatMap((item) => item.colors))
+            ).map((color) => (
+              <option key={color} value={color}>
+                {color}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="flex flex-wrap justify-center">
+        {sortedItems.map((item) => (
+          <div key={item.id} className="w-80 p-4">
+            <ProductCard item={item} onAddToCart={handleAddToCart} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
