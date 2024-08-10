@@ -1,9 +1,12 @@
 import Item from "../components/item";
+import Banner from "../components/Banner";
 
 const Home = () => {
   return (
-    <div className="bg-black/80">
-      <h1 className="text-4xl">Banner</h1>
+    <div className="bg-black/80 ">
+
+        <Banner />
+
       <Item />
     </div>
   );
