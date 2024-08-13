@@ -5,7 +5,7 @@ import defaultProfileImage from "../assets/profile_picture.webp";
 const Profile = () => {
   const initialUser = {
     name: "Afzal Shaikh",
-    email: "tom@example.com",
+    email: "Afzal@example.com",
     imageUrl: defaultProfileImage,
   };
 

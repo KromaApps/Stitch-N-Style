@@ -4,16 +4,7 @@ import { Sidebar } from "./Sidebar/Sidebar";
 // import { BsList } from "react-icons/bs";
 import { CiShoppingCart } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from "@headlessui/react";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
 const userNavigation = [
   { name: "Your Profile", to: "/profile" },

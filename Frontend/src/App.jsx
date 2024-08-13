@@ -11,13 +11,14 @@ import {
   OrderConfirmation,
   Settings,
   Profile,
+  CustomizationForm,
 } from "./pages/index";
 import { Header, Footer } from "./components/index";
 
 function App() {
   return (
     <>
-      <BrowserRouter >
+      <BrowserRouter>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -30,6 +31,7 @@ function App() {
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/custom-form" element={<CustomizationForm />} />
         </Routes>
         <Footer />
       </BrowserRouter>
