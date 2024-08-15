@@ -121,7 +121,7 @@ const clothingItems = [
     description: "A traditional Indian kurti with intricate embroidery.",
     material: "Cotton",
     stock: 60,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/q71jTfRd/1.jpg", "https://i.postimg.cc/gjJwbR1s/2.jpg"],
   },
   {
     id: 10,
@@ -132,7 +132,7 @@ const clothingItems = [
     description: "A classic men's sherwani with detailed designs.",
     material: "Silk",
     stock: 25,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/5t2SpPmK/3.jpg", "https://i.postimg.cc/bwzxN64Y/4.jpg"],
   },
   {
     id: 11,
@@ -143,7 +143,7 @@ const clothingItems = [
     description: "A modest and elegant abaya for traditional wear.",
     material: "Chiffon",
     stock: 40,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/nrb78TvJ/5.jpg", "https://i.postimg.cc/kMKKN3mX/6.jpg"],
   },
   {
     id: 12,
@@ -154,7 +154,7 @@ const clothingItems = [
     description: "A traditional thobe worn by men in Saudi Arabia.",
     material: "Cotton Blend",
     stock: 50,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/DyhsBjvQ/7.jpg", "https://i.postimg.cc/DwyGKSb8/8.jpg"],
   },
   {
     id: 13,
@@ -165,7 +165,7 @@ const clothingItems = [
     description: "An exquisite lehenga for weddings and special occasions.",
     material: "Silk",
     stock: 20,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/fWcStccV/10.jpg", "https://i.postimg.cc/yY7gFDjv/11.jpg"],
   },
   {
     id: 14,
@@ -176,7 +176,7 @@ const clothingItems = [
     description: "A comfortable kurta pajama set for traditional wear.",
     material: "Cotton",
     stock: 75,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/13j8hJQj/1.jpg", "https://i.postimg.cc/G2099t9P/2.jpg"],
   },
   {
     id: 15,
@@ -187,7 +187,7 @@ const clothingItems = [
     description: "A vibrant salwar kameez set with traditional prints.",
     material: "Cotton Blend",
     stock: 90,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/k4xGSCt0/3.jpg", "https://i.postimg.cc/3N1wLZ19/4.jpg"],
   },
   {
     id: 16,
@@ -198,7 +198,7 @@ const clothingItems = [
     description: "A traditional kandura worn in the UAE and Gulf countries.",
     material: "Polyester Blend",
     stock: 45,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/Dw8zgLXd/5.jpg", "https://i.postimg.cc/s2WgFzKM/6.jpg"],
   },
   {
     id: 17,
@@ -209,7 +209,7 @@ const clothingItems = [
     description: "An elegant anarkali dress for festive occasions.",
     material: "Silk Blend",
     stock: 35,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/bJjNp5F3/7.jpg", "https://i.postimg.cc/ZRFYRLGZ/8.jpg"],
   },
   {
     id: 18,
@@ -221,7 +221,7 @@ const clothingItems = [
       "A traditional Pathani suit for men, popular in Pakistan and North India.",
     material: "Cotton",
     stock: 60,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/kGJJtbCS/12.jpg", "https://i.postimg.cc/yxLVh86b/13.jpg"],
   },
   {
     id: 19,
@@ -233,7 +233,7 @@ const clothingItems = [
       "A beautiful saree with intricate embroidery, perfect for weddings.",
     material: "Silk",
     stock: 40,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/wjC9QPHg/14.jpg", "https://i.postimg.cc/wvHHSm7r/15.jpg"],
   },
   {
     id: 20,
@@ -244,7 +244,7 @@ const clothingItems = [
     description: "A traditional Jubba worn in Islamic cultures.",
     material: "Cotton",
     stock: 55,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/yxpHgpvq/16.jpg", "https://i.postimg.cc/vHDMFMZG/17.jpg"],
   },
   {
     id: 21,
@@ -255,7 +255,7 @@ const clothingItems = [
     description: "A traditional South Indian dress for young girls.",
     material: "Silk",
     stock: 30,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/hv5kPztc/18.jpg", "https://i.postimg.cc/vH1R2z0B/19.jpg"],
   },
   {
     id: 22,
@@ -266,7 +266,7 @@ const clothingItems = [
     description: "A regal achkan for men, worn on special occasions.",
     material: "Silk",
     stock: 25,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/9fhvMjCR/20.jpg", "https://i.postimg.cc/Ls3Gg08y/21.jpg"],
   },
   {
     id: 23,
@@ -277,7 +277,7 @@ const clothingItems = [
     description: "A flowing kaftan perfect for casual and traditional wear.",
     material: "Chiffon",
     stock: 50,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/T1psSdqS/22.jpg", "https://i.postimg.cc/90KkH6Lf/23.jpg"],
   },
   {
     id: 24,
@@ -288,7 +288,7 @@ const clothingItems = [
     description: "A stylish churidar kurta set for traditional events.",
     material: "Cotton",
     stock: 70,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/0ypBhHD8/24.jpg", "https://i.postimg.cc/gJ0tXz5J/25.jpg"],
   },
   {
     id: 25,
@@ -299,7 +299,7 @@ const clothingItems = [
     description: "A gorgeous sharara set with intricate embellishments.",
     material: "Georgette",
     stock: 45,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/W1wP0496/26.jpg", "https://i.postimg.cc/vm8whdkR/27.jpg"],
   },
   {
     id: 26,
@@ -310,7 +310,7 @@ const clothingItems = [
     description: "A traditional angrakha worn by men in Rajasthan.",
     material: "Cotton Silk",
     stock: 30,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/ZRCtkxJV/28.jpg", "https://i.postimg.cc/Vs0QDgGN/29.jpg"],
   },
   {
     id: 27,
@@ -321,7 +321,7 @@ const clothingItems = [
     description: "A stylish gharara with intricate lacework.",
     material: "Silk",
     stock: 40,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/7Y1RWWgq/31.jpg", "https://i.postimg.cc/TP1Hh2BP/32.jpg"],
   },
   {
     id: 28,
@@ -332,7 +332,7 @@ const clothingItems = [
     description: "A traditional dhoti kurta set for festive occasions.",
     material: "Cotton",
     stock: 60,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/KY1Jxqgk/33.jpg", "https://i.postimg.cc/HxQ0kfWx/34.jpg"],
   },
   {
     id: 29,
@@ -343,7 +343,7 @@ const clothingItems = [
     description: "A vibrant Patiala suit with a comfortable fit.",
     material: "Cotton Blend",
     stock: 80,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/L6qXkjfk/35.jpg", "https://i.postimg.cc/G22rL1xP/36.jpg"],
   },
   {
     id: 30,
@@ -354,7 +354,7 @@ const clothingItems = [
     description: "A traditional lungi worn in South India.",
     material: "Cotton",
     stock: 100,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/SxfJjkCH/37.jpg", "https://i.postimg.cc/d1L1WCpK/38.jpg"],
   },
 
   {
@@ -366,7 +366,7 @@ const clothingItems = [
     description: "Elegant kurti set with matching dupatta.",
     material: "Georgette",
     stock: 70,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/kgsgqwdm/39.jpg", "https://i.postimg.cc/gjJwbR1s/2.jpg"],
   },
   {
     id: 32,
@@ -377,7 +377,7 @@ const clothingItems = [
     description: "Formal maxi dress suitable for events.",
     material: "Polyester Blend",
     stock: 55,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/Pxgt2R1m/41.jpg", "https://i.postimg.cc/L4P4nmMv/42.jpg"],
   },
   {
     id: 33,
@@ -388,7 +388,7 @@ const clothingItems = [
     description: "Traditional tunic with embroidery.",
     material: "Cotton",
     stock: 80,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/W1NsWrqf/43.jpg", "https://i.postimg.cc/Hk6dfxQW/44.jpg"],
   },
   {
     id: 34,
@@ -399,7 +399,7 @@ const clothingItems = [
     description: "Simple and elegant western shift dress.",
     material: "Polyester",
     stock: 65,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/SRLpVNSh/45.jpg", "https://i.postimg.cc/5981fpwR/46.jpg"],
   },
   {
     id: 35,
@@ -410,7 +410,7 @@ const clothingItems = [
     description: "Flowy anarkali suit with intricate designs.",
     material: "Chiffon",
     stock: 45,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/MHSCc2yr/47.jpg", "https://i.postimg.cc/wMQSLf2x/48.jpg"],
   },
   {
     id: 36,
@@ -421,7 +421,7 @@ const clothingItems = [
     description: "Sophisticated jumpsuit for formal occasions.",
     material: "Polyester Blend",
     stock: 50,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/QtLPPGnx/49.jpg", "https://i.postimg.cc/HxQK1Zf0/50.jpg"],
   },
   {
     id: 37,
@@ -432,7 +432,7 @@ const clothingItems = [
     description: "Classic salwar kameez for traditional wear.",
     material: "Cotton",
     stock: 75,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/SK91c1N0/51.jpg", "https://i.postimg.cc/Vvf7QY91/52.jpg"],
   },
   {
     id: 38,
@@ -443,7 +443,7 @@ const clothingItems = [
     description: "Elegant formal blouse for western outfits.",
     material: "Silk Blend",
     stock: 90,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/Df6jQXFz/53.jpg", "https://i.postimg.cc/3JwLtxJF/54.jpg"],
   },
   {
     id: 39,
@@ -454,7 +454,7 @@ const clothingItems = [
     description: "Timeless saree with classic design.",
     material: "Silk",
     stock: 35,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/j234pydQ/55.jpg", "https://i.postimg.cc/zDx7HYSb/56.jpg"],
   },
   {
     id: 40,
@@ -465,7 +465,7 @@ const clothingItems = [
     description: "Chic western skirt suitable for various occasions.",
     material: "Polyester Blend",
     stock: 80,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/KYhDhGFV/57.jpg", "https://i.postimg.cc/43vbJDx3/58.jpg"],
   },
   {
     id: 41,
@@ -476,7 +476,7 @@ const clothingItems = [
     description: "Richly adorned lehenga choli with intricate embroidery.",
     material: "Silk",
     stock: 30,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/7h52Tdw0/59.jpg", "https://i.postimg.cc/wMns52jP/60.jpg"],
   },
   {
     id: 42,
@@ -487,7 +487,7 @@ const clothingItems = [
     description: "Tailored western dress pants for formal settings.",
     material: "Wool Blend",
     stock: 60,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/YCKWhdVL/61.jpg", "https://i.postimg.cc/LsmgVnmH/62.jpg"],
   },
   {
     id: 43,
@@ -498,7 +498,7 @@ const clothingItems = [
     description: "Elegant churidar with traditional detailing.",
     material: "Cotton Blend",
     stock: 55,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/gcxshBMg/70.jpg", "https://i.postimg.cc/pd0QhDKN/71.jpg"],
   },
   {
     id: 44,
@@ -509,7 +509,7 @@ const clothingItems = [
     description: "Sophisticated shift dress for a polished look.",
     material: "Polyester",
     stock: 65,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/SRLpVNSh/45.jpg", "https://i.postimg.cc/5981fpwR/46.jpg"],
   },
   {
     id: 45,
@@ -520,7 +520,7 @@ const clothingItems = [
     description: "Flowy anarkali dress with beautiful prints.",
     material: "Georgette",
     stock: 40,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/3wPRcNT4/74.jpg", "https://i.postimg.cc/BbCnbC1H/75.jpg"],
   },
   {
     id: 46,
@@ -531,7 +531,7 @@ const clothingItems = [
     description: "Tailored blazer for formal western wear.",
     material: "Wool Blend",
     stock: 55,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/N0rGmtHg/76.jpg", "https://i.postimg.cc/sDDVK7hH/77.jpg"],
   },
   {
     id: 47,
@@ -542,7 +542,7 @@ const clothingItems = [
     description: "Classic salwar suit with simple yet elegant design.",
     material: "Cotton",
     stock: 70,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/Z5dXL5VD/78.jpg", "https://i.postimg.cc/ydvGNg8W/79.jpg"],
   },
   {
     id: 48,
@@ -553,7 +553,7 @@ const clothingItems = [
     description: "Elegant maxi skirt suitable for formal occasions.",
     material: "Polyester",
     stock: 60,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/Xq6g4nwX/80.jpg", "https://i.postimg.cc/br09v4Tg/81.jpg"],
   },
   {
     id: 49,
@@ -564,7 +564,7 @@ const clothingItems = [
     description: "Traditional kurta set with matching pants.",
     material: "Cotton Blend",
     stock: 50,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/kXcyP3DX/82.jpg", "https://i.postimg.cc/2S9F3Q4s/83.jpg"],
   },
   {
     id: 50,
@@ -575,7 +575,7 @@ const clothingItems = [
     description: "Stylish jumpsuit for a chic look.",
     material: "Polyester Blend",
     stock: 45,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/CLQzqmQs/84.jpg", "https://i.postimg.cc/CxndHbyT/85.jpg"],
   },
   {
     id: 51,
@@ -586,7 +586,7 @@ const clothingItems = [
     description: "Traditional patiala suit with intricate embroidery.",
     material: "Cotton",
     stock: 60,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/QM4X2tZk/90.jpg", "https://i.postimg.cc/QCLrDK45/86.jpg"],
   },
   {
     id: 52,
@@ -597,7 +597,7 @@ const clothingItems = [
     description: "Elegant A-line dress for western outfits.",
     material: "Polyester Blend",
     stock: 55,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/wvXwttxD/87.jpg", "https://i.postimg.cc/rsggJvrm/88.jpg"],
   },
   {
     id: 53,
@@ -608,7 +608,7 @@ const clothingItems = [
     description: "Traditional sherwani with beautiful embroidery.",
     material: "Silk",
     stock: 30,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/LsfT7q1G/89.jpg", "https://i.postimg.cc/kGjF8K0R/91.jpg"],
   },
   {
     id: 54,
@@ -619,7 +619,7 @@ const clothingItems = [
     description: "Stylish cape dress for a trendy look.",
     material: "Polyester",
     stock: 40,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/fRdmWGR9/92.jpg", "https://i.postimg.cc/MG8Rn9nr/93.jpg"],
   },
   {
     id: 55,
@@ -630,7 +630,7 @@ const clothingItems = [
     description: "Graceful anarkali kurta with traditional flair.",
     material: "Georgette",
     stock: 50,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/QMbBHhGH/94.jpg", "https://i.postimg.cc/269V7G5Y/95.jpg"],
   },
   {
     id: 56,
@@ -641,7 +641,7 @@ const clothingItems = [
     description: "Elegant dress shirt for formal western wear.",
     material: "Cotton Blend",
     stock: 70,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/NFWFW0TP/96.jpg", "https://i.postimg.cc/jS62FtjZ/97.jpg"],
   },
   {
     id: 57,
@@ -652,7 +652,7 @@ const clothingItems = [
     description: "Traditional kurtas with simple yet elegant designs.",
     material: "Cotton",
     stock: 80,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/Bt9ZmV9r/98.jpg", "https://i.postimg.cc/NGy1P2vD/99.jpg"],
   },
   {
     id: 58,
@@ -663,7 +663,7 @@ const clothingItems = [
     description: "Stylish western blazer for formal and casual wear.",
     material: "Wool Blend",
     stock: 45,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/TYMW7k92/100.jpg", "https://i.postimg.cc/L8vYsmMh/101.jpg"],
   },
   {
     id: 59,
@@ -674,7 +674,7 @@ const clothingItems = [
     description: "Elegant gown with intricate Indian embroidery.",
     material: "Silk",
     stock: 35,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/3R0d9p0D/102.jpg", "https://i.postimg.cc/yxqWGd0p/103.jpg"],
   },
   {
     id: 60,
@@ -685,7 +685,7 @@ const clothingItems = [
     description: "Chic western tunic for a sophisticated look.",
     material: "Polyester",
     stock: 65,
-    images: ["url-front", "url-back"],
+    images: ["https://i.postimg.cc/ZR6GN9KJ/110.jpg", "https://i.postimg.cc/fLsH68Dh/111.jpg"],
   },
 ];
 
