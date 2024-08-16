@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import sizeCharts from "../services/sizeapi";
 
-function CustomizationChat() {
+function CustomizationForm() {
   const [step, setStep] = useState(0);
   const [gender, setGender] = useState("");
   const [occasion, setOccasion] = useState("");
@@ -44,6 +44,14 @@ function CustomizationChat() {
     setSelectedSizes({ top: "", bottom: "" });
   };
 
+  const handleNext = () => {
+    setStep(step + 1);
+  };
+
+  const handleFinish = () => {
+    setStep(step + 1);
+  };
+
   const getSizeChartData = () => {
     switch (gender) {
       case "men":
@@ -76,25 +84,10 @@ function CustomizationChat() {
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-md">
-        <div className="flex justify-between mb-4">
-          <button
-            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"
-            onClick={handleBack}
-            disabled={step === 0}
-          >
-            Back
-          </button>
-          <button
-            className="px-4 py-2 bg-red-500 text-white rounded-md"
-            onClick={handleReset}
-          >
-            Reset
-          </button>
-        </div>
         <div className="space-y-4">
           <div className="text-center">
             <p className="text-lg font-semibold text-gray-700">
-              Welcome to the Fashion Customization Chat!
+              Welcome to the Fashion Customization!
             </p>
           </div>
           {step === 0 && (
@@ -160,43 +153,42 @@ function CustomizationChat() {
                     <table className="min-w-full bg-white">
                       <thead>
                         <tr>
-                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
                             Size
                           </th>
                           {gender !== "boys" && gender !== "girls" && (
-                            <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
                               Bust (in)
                             </th>
                           )}
                           {gender === "boys" || gender === "girls" ? (
-                            <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
                               Chest (in)
                             </th>
                           ) : null}
-                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                            Front-Length (in)
+                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            Front-
+                            <br />
+                            Length (in)
                           </th>
                           {gender !== "men" && (
                             <>
-                              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                                Sleeve-Length (in)
+                              <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                                Sleeve
+                                <br />
+                                -Length (in)
                               </th>
-                              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                              <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
                                 Waist (in)
                               </th>
-                              {gender === "women" && (
-                                <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                                  Hips (in)
-                                </th>
-                              )}
                             </>
                           )}
                           {gender !== "women" && (
-                            <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
                               Across Shoulder (in)
                             </th>
                           )}
-                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
                             Select
                           </th>
                         </tr>
@@ -204,55 +196,46 @@ function CustomizationChat() {
                       <tbody>
                         {top.map((row, index) => (
                           <tr key={index} className="hover:bg-gray-100">
-                            <td className="px-4 py-2 border-b border-gray-300">
+                            <td className="px-0.5 py-2 border-b border-gray-300">
                               {row.size}
                             </td>
                             {gender !== "boys" && gender !== "girls" && (
-                              <td className="px-4 py-2 border-b border-gray-300">
+                              <td className="px-0.5 py-2 border-b border-gray-300">
                                 {row.bust || row.chest}
                               </td>
                             )}
                             {gender === "boys" || gender === "girls" ? (
-                              <td className="px-4 py-2 border-b border-gray-300">
+                              <td className="px-0.5 py-2 border-b border-gray-300">
                                 {row.chest}
                               </td>
                             ) : null}
-                            <td className="px-4 py-2 border-b border-gray-300">
+                            <td className="px-0.5 py-2 border-b border-gray-300">
                               {row.frontlength}
                             </td>
                             {gender !== "men" && (
                               <>
-                                <td className="px-4 py-2 border-b border-gray-300">
+                                <td className="px-0.5 py-2 border-b border-gray-300">
                                   {row.sleevelength}
                                 </td>
-                                <td className="px-4 py-2 border-b border-gray-300">
+                                <td className="px-0.5 py-2 border-b border-gray-300">
                                   {row.waist}
                                 </td>
-                                {gender === "women" && (
-                                  <td className="px-4 py-2 border-b border-gray-300">
-                                    {row.hips}
-                                  </td>
-                                )}
                               </>
                             )}
                             {gender !== "women" && (
-                              <td className="px-4 py-2 border-b border-gray-300">
+                              <td className="px-0.5 py-2 border-b border-gray-300">
                                 {row.acrossshoulder}
                               </td>
                             )}
-                            <td className="px-4 py-2 border-b border-gray-300">
-                              <button
-                                className={`px-2 py-1 rounded-md ${
-                                  selectedSizes.top === row.size
-                                    ? "bg-blue-500 text-white"
-                                    : "bg-gray-300 text-gray-800"
-                                }`}
-                                onClick={() =>
+                            <td className="px-0.5 py-2 border-b border-gray-300">
+                              <input
+                                type="radio"
+                                name="topSize"
+                                value={row.size}
+                                onChange={() =>
                                   handleSizeSelect("top", row.size)
                                 }
-                              >
-                                Select
-                              </button>
+                              />
                             </td>
                           </tr>
                         ))}
@@ -261,7 +244,6 @@ function CustomizationChat() {
                   </div>
                 </div>
               )}
-
               {(clothingType === "bottom" || clothingType === "both") && (
                 <div>
                   <p className="text-gray-600 font-semibold">
@@ -271,16 +253,24 @@ function CustomizationChat() {
                     <table className="min-w-full bg-white">
                       <thead>
                         <tr>
-                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
                             Size
                           </th>
-                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                            Waist (in)
+                          {gender !== "boys" && gender !== "girls" && (
+                            <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                              Waist (in)
+                            </th>
+                          )}
+                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            Hip (in)
                           </th>
-                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
                             Inseam (in)
                           </th>
-                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            Outseam (in)
+                          </th>
+                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
                             Select
                           </th>
                         </tr>
@@ -288,28 +278,32 @@ function CustomizationChat() {
                       <tbody>
                         {bottom.map((row, index) => (
                           <tr key={index} className="hover:bg-gray-100">
-                            <td className="px-4 py-2 border-b border-gray-300">
+                            <td className="px-0.5 py-2 border-b border-gray-300">
                               {row.size}
                             </td>
-                            <td className="px-4 py-2 border-b border-gray-300">
-                              {row.waist}
+                            {gender !== "boys" && gender !== "girls" && (
+                              <td className="px-0.5 py-2 border-b border-gray-300">
+                                {row.waist}
+                              </td>
+                            )}
+                            <td className="px-0.5 py-2 border-b border-gray-300">
+                              {row.hips}
                             </td>
-                            <td className="px-4 py-2 border-b border-gray-300">
+                            <td className="px-0.5 py-2 border-b border-gray-300">
                               {row.inseamlength}
                             </td>
-                            <td className="px-4 py-2 border-b border-gray-300">
-                              <button
-                                className={`px-2 py-1 rounded-md ${
-                                  selectedSizes.bottom === row.size
-                                    ? "bg-blue-500 text-white"
-                                    : "bg-gray-300 text-gray-800"
-                                }`}
-                                onClick={() =>
+                            <td className="px-0.5 py-2 border-b border-gray-300">
+                              {row.outseamlength}
+                            </td>
+                            <td className="px-0.5 py-2 border-b border-gray-300">
+                              <input
+                                type="radio"
+                                name="bottomSize"
+                                value={row.size}
+                                onChange={() =>
                                   handleSizeSelect("bottom", row.size)
                                 }
-                              >
-                                Select
-                              </button>
+                              />
                             </td>
                           </tr>
                         ))}
@@ -322,33 +316,50 @@ function CustomizationChat() {
           )}
 
           {step === 4 && (
-            <div className="space-y-2">
-              <p className="text-gray-600">
-                Thank you! Here's a summary of your selections:
+            <div className="space-y-4">
+              <p className="text-gray-600 font-semibold">
+                You've completed the customization process!
               </p>
-              <ul className="list-disc list-inside">
-                <li>
-                  <strong>Gender:</strong> {gender}
-                </li>
-                <li>
-                  <strong>Occasion:</strong> {occasion}
-                </li>
-                <li>
-                  <strong>Clothing Type:</strong> {clothingType}
-                </li>
-                <li>
-                  <strong>Top Size:</strong> {selectedSizes.top}
-                </li>
-                <li>
-                  <strong>Bottom Size:</strong> {selectedSizes.bottom}
-                </li>
+              <p className="text-gray-600">Your selected sizes are:</p>
+              <ul>
+                <li>Top: {selectedSizes.top}</li>
+                <li>Bottom: {selectedSizes.bottom}</li>
               </ul>
+              <button
+                className="px-4 py-2 bg-green-500 text-white rounded-md"
+                onClick={handleFinish}
+              >
+                Finish
+              </button>
             </div>
           )}
+        </div>
+        <div className="flex justify-between mt-4">
+          <button
+            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"
+            onClick={handleBack}
+            disabled={step === 0}
+          >
+            Back
+          </button>
+          <button
+            className="px-4 py-2 bg-red-500 text-white rounded-md"
+            onClick={handleReset}
+          >
+            Reset
+          </button>
+
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded-md"
+            onClick={handleNext}
+            disabled={step === 4}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-export default CustomizationChat;
+export default CustomizationForm;
