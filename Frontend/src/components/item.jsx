@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import clothingItems from "../services/api";
+import clothingItems from "../services/itemapi";
 
 const ProductCard = ({ item, onAddToCart }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -188,7 +188,7 @@ const Item = () => {
     <div>
       <div className="flex justify-between items-center mb-4">
         <div>
-          <label htmlFor="sort" className="mr-2 text-white">
+          <label htmlFor="sort" className="mr-2 text-black">
             Sort by:
           </label>
           <select
@@ -202,7 +202,7 @@ const Item = () => {
           </select>
         </div>
         <div>
-          <label htmlFor="filterSize" className="mr-2 text-white">
+          <label htmlFor="filterSize" className="mr-2 text-black">
             Filter by Size:
           </label>
           <select
@@ -222,7 +222,7 @@ const Item = () => {
           </select>
         </div>
         <div>
-          <label htmlFor="filterColor" className="mr-2 text-white">
+          <label htmlFor="filterColor" className="mr-2 text-black">
             Filter by Color:
           </label>
           <select

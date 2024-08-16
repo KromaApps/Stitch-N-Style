@@ -1,478 +1,354 @@
-import React from "react";
+import React, { useState } from "react";
+import sizeCharts from "../services/sizeapi";
 
-const womenTop = [
-  {
-    size: "XS",
-    bust: "34.0",
-    frontlength: "46.0",
-    sleevelength: "17.0",
-    waist: "32.0",
-    hips: "36.0",
-  },
-  {
-    size: "S",
-    bust: "36.0",
-    frontlength: "46.0",
-    sleevelength: "17",
-    waist: "34.0",
-    hips: "38.0",
-  },
-  {
-    size: "M",
-    bust: "38.0",
-    frontlength: "46.0",
-    sleevelength: "17.0",
-    waist: "36.0",
-    hips: "40.0",
-  },
-  {
-    size: "L",
-    bust: "40.0",
-    frontlength: "46.0",
-    sleevelength: "17.0",
-    waist: "38.0",
-    hips: "42.0",
-  },
-  {
-    size: "XL",
-    bust: "42.0",
-    frontlength: "46.0",
-    sleevelength: "17.0",
-    waist: "40.0",
-    hips: "44.0",
-  },
-  {
-    size: "XXL",
-    bust: "44.0",
-    frontlength: "46.0",
-    sleevelength: "17.0",
-    waist: "42.0",
-    hips: "46.0",
-  },
-];
-const WomenBottom = [
-  {
-    size: "26",
-    brandsize: "XS",
-    waist: "26.0",
-    inseamlength: "28.5",
-    outseamlength: "41.0",
-  },
-  {
-    size: "28",
-    brandsize: "S",
-    waist: "28.0",
-    inseamlength: "29.0",
-    outseamlength: "41.0",
-  },
-  {
-    size: "30",
-    brandsize: "M",
-    waist: "30.0",
-    inseamlength: "29.5",
-    outseamlength: "41.0",
-  },
-  {
-    size: "32",
-    brandsize: "L",
-    waist: "32.0",
-    inseamlength: "30.0",
-    outseamlength: "41.0",
-  },
-  {
-    size: "34",
-    brandsize: "XL",
-    waist: "34.0",
-    inseamlength: "30.5",
-    outseamlength: "41.0",
-  },
-  {
-    size: "36",
-    brandsize: "XS",
-    waist: "36.0",
-    inseamlength: "31.0",
-    outseamlength: "41.0",
-  },
-];
-const mensUpperWear = [
-  {
-    size: "39",
-    chest: "41.3",
-    frontlength: "30.1",
-    acrossshoulder: "18.2",
-  },
-  {
-    size: "40",
-    chest: "42.5",
-    frontlength: "30.3",
-    acrossshoulder: "18.5",
-  },
-  {
-    size: "42",
-    chest: "44.9",
-    frontlength: "30.7",
-    acrossshoulder: "19.1",
-  },
-  {
-    size: "44",
-    chest: "47.2",
-    frontlength: "31.1",
-    acrossshoulder: "19.7",
-  },
-];
-const mensBottom = [
-  {
-    size: "28",
-    waist: "28.0",
-    inseamlength: "30.0",
-  },
-  {
-    size: "30",
-    waist: "30.0",
-    inseamlength: "30.0",
-  },
-  {
-    size: "32",
-    waist: "32.0",
-    inseamlength: "30.0",
-  },
-  {
-    size: "34",
-    waist: "34.0",
-    inseamlength: "30.0",
-  },
-  {
-    size: "36",
-    waist: "36.0",
-    inseamlength: "30.0",
-  },
-];
-const boysUpperWear = [
-  {
-    size: "8-9Y",
-    chest: "27.0",
-    frontlength: "22.0",
-    acrossshoulder: "12.9",
-  },
-  {
-    size: "9-10Y",
-    chest: "28.5",
-    frontlength: "23.0",
-    acrossshoulder: "13.3",
-  },
-  {
-    size: "11-12Y",
-    chest: "30.0",
-    frontlength: "24.0",
-    acrossshoulder: "13.6",
-  },
-  {
-    size: "13-14Y",
-    chest: "32.0",
-    frontlength: "25.0",
-    acrossshoulder: "14.1",
-  },
-];
-const boysBottom = [
-  {
-    size: "4-5Y",
-    waist: "22.8",
-    inseamlength: "14.0",
-  },
-  {
-    size: "5-6Y",
-    waist: "23.6",
-    inseamlength: "15.5",
-  },
-  {
-    size: "7-8Y",
-    waist: "24.8",
-    inseamlength: "17.0",
-  },
-];
-const girlsTop = [
-  {
-    size: "4-5Y",
-    chest: "25.0",
-    frontlength: "15.0",
-    waist: "23.0",
-    acrossshoulder: "9.5",
-  },
-  {
-    size: "6-7Y",
-    chest: "27.0",
-    frontlength: "16.0",
-    waist: "25.0",
-    acrossshoulder: "10.3",
-  },
-  {
-    size: "7-8Y",
-    chest: "29.0",
-    frontlength: "17.0",
-    waist: "27.0",
-    acrossshoulder: "11.0",
-  },
-  {
-    size: "9-10Y",
-    chest: "31.0",
-    frontlength: "18.0",
-    waist: "29.0",
-    acrossshoulder: "11.8",
-  },
-];
-const girlsBottom = [
-  {
-    size: "4-5Y",
-    waist: "18.0",
-    inseamlength: "25.0",
-  },
-  {
-    size: "5-6Y",
-    waist: "19.0",
-    inseamlength: "26.0",
-  },
-  {
-    size: "6-7Y",
-    waist: "20.0",
-    inseamlength: "28.0",
-  },
-];
+function CustomizationChat() {
+  const [step, setStep] = useState(0);
+  const [gender, setGender] = useState("");
+  const [occasion, setOccasion] = useState("");
+  const [clothingType, setClothingType] = useState("");
+  const [selectedSizes, setSelectedSizes] = useState({ top: "", bottom: "" });
 
-function CustomizationForm() {
+  const handleGenderChange = (e) => {
+    setGender(e.target.value);
+    setStep(step + 1);
+  };
+
+  const handleOccasionChange = (e) => {
+    setOccasion(e.target.value);
+    setStep(step + 1);
+  };
+
+  const handleClothingTypeChange = (e) => {
+    setClothingType(e.target.value);
+    setStep(step + 1);
+  };
+
+  const handleSizeSelect = (type, size) => {
+    setSelectedSizes((prevSizes) => ({
+      ...prevSizes,
+      [type]: size,
+    }));
+  };
+
+  const handleBack = () => {
+    if (step > 0) {
+      setStep(step - 1);
+    }
+  };
+
+  const handleReset = () => {
+    setStep(0);
+    setGender("");
+    setOccasion("");
+    setClothingType("");
+    setSelectedSizes({ top: "", bottom: "" });
+  };
+
+  const getSizeChartData = () => {
+    switch (gender) {
+      case "men":
+        return {
+          top: sizeCharts.men.mensUpperWear,
+          bottom: sizeCharts.men.mensBottom,
+        };
+      case "women":
+        return {
+          top: sizeCharts.women.womenTop,
+          bottom: sizeCharts.women.WomenBottom,
+        };
+      case "boys":
+        return {
+          top: sizeCharts.boys.boysUpperWear,
+          bottom: sizeCharts.boys.boysBottom,
+        };
+      case "girls":
+        return {
+          top: sizeCharts.girls.girlsTop,
+          bottom: sizeCharts.girls.girlsBottom,
+        };
+      default:
+        return { top: [], bottom: [] };
+    }
+  };
+
+  const { top, bottom } = getSizeChartData();
+
   return (
-    <div>
-      <h1>
-        We Believe that fashion should be as unique as you are. Our bespoke
-        cloth customization services are designed to bring your vision to life,
-        offering endless possibilities to personalize your wardrobe.
-      </h1>
-      <div>
-        <p>Select: </p>
-        <select>
-          <option value="male">Men</option>
-          <option value="female">Women</option>
-          <option value="female">Girl</option>
-          <option value="female">Boy</option>
-        </select>
-      </div>
-      <div>
-        <p>Select Occasion: </p>
-        <select>
-          <option value="wedding-wear">Wedding Wear</option>
-          <option value="casual-wear">Casual Wear</option>
-          <option value="office-wear">Office Wear</option>
-          <option value="party-wear">Party Wear</option>
-        </select>
-      </div>
-      <div>
-        <h2 className="women-top">Size Chart:</h2>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Size</th>
-              <th>Bust (in)</th>
-              <th>Front-Length (in)</th>
-              <th>Sleeve-Length (in)</th>
-              <th>Waist (in)</th>
-              <th>Hips (in)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {womenTop.map((row, index) => (
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>{row.size}</td>
-                <td>{row.bust}</td>
-                <td>{row.frontlength}</td>
-                <td>{row.sleevelength}</td>
-                <td>{row.waist}</td>
-                <td>{row.hips}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <h2 className="women-bottom">Size Chart:</h2>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Size</th>
-              <th>Brand-Size</th>
-              <th>Waist(in)</th>
-              <th>Inseam-Length (in)</th>
-              <th>Outseam-Length (in)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {WomenBottom.map((row, index) => (
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>{row.size}</td>
-                <td>{row.brandsize}</td>
-                <td>{row.waist}</td>
-                <td>{row.inseamlength}</td>
-                <td>{row.outseamlength}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <h2 className="mens-upperwear">Size Chart:</h2>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Size</th>
-              <th>Chest(in)</th>
-              <th>Front-Length (in)</th>
-              <th>Across Shoulder (in)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {mensUpperWear.map((row, index) => (
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>{row.size}</td>
-                <td>{row.chest}</td>
-                <td>{row.frontlength}</td>
-                <td>{row.acrossshoulder}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <h2 className="mens-bottom">Size Chart:</h2>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Size</th>
-              <th>Waist (in)</th>
-              <th>Inseam-Length (in)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {mensBottom.map((row, index) => (
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>{row.size}</td>
-                <td>{row.waist}</td>
-                <td>{row.inseamlength}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <h2 className="boys-upperwear">Size Chart:</h2>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Size</th>
-              <th>chest (in)</th>
-              <th>Front-Length (in)</th>
-              <th>Across Shoulder (in)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {boysUpperWear.map((row, index) => (
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>{row.size}</td>
-                <td>{row.chest}</td>
-                <td>{row.frontlength}</td>
-                <td>{row.acrossshoulder}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <h2 className="boys-bottom">Size Chart:</h2>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Size</th>
-              <th>Waist (in)</th>
-              <th>Inseam-Length (in)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {boysBottom.map((row, index) => (
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>{row.size}</td>
-                <td>{row.waist}</td>
-                <td>{row.inseamlength}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <h2 className="girls-top">Size Chart:</h2>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Size</th>
-              <th>Chest (in)</th>
-              <th>Front-Length (in)</th>
-              <th>Waist (in)</th>
-              <th>Across Shoulder (in)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {girlsTop.map((row, index) => (
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>{row.size}</td>
-                <td>{row.chest}</td>
-                <td>{row.frontlength}</td>
-                <td>{row.waist}</td>
-                <td>{row.acrossshoulder}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <h2 className="girls-bottom">Size Chart:</h2>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Size</th>
-              <th>Waist (in)</th>
-              <th>Inseam-Length (in)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {girlsBottom.map((row, index) => (
-              <tr>
-                <td>
-                  <input type="checkbox" />
-                </td>
-                <td>{row.size}</td>
-                <td>{row.bust}</td>
-                <td>{row.frontlength}</td>
-                <td>{row.sleevelength}</td>
-                <td>{row.waist}</td>
-                <td>{row.hips}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+      <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-md">
+        <div className="flex justify-between mb-4">
+          <button
+            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"
+            onClick={handleBack}
+            disabled={step === 0}
+          >
+            Back
+          </button>
+          <button
+            className="px-4 py-2 bg-red-500 text-white rounded-md"
+            onClick={handleReset}
+          >
+            Reset
+          </button>
+        </div>
+        <div className="space-y-4">
+          <div className="text-center">
+            <p className="text-lg font-semibold text-gray-700">
+              Welcome to the Fashion Customization Chat!
+            </p>
+          </div>
+          {step === 0 && (
+            <div className="space-y-2">
+              <p className="text-gray-600">Hi there! Who is this for?</p>
+              <select
+                value={gender}
+                onChange={handleGenderChange}
+                className="w-full px-3 py-2 border rounded-md"
+              >
+                <option value="">Select Gender</option>
+                <option value="men">Men</option>
+                <option value="women">Women</option>
+                <option value="girls">Girls</option>
+                <option value="boys">Boys</option>
+              </select>
+            </div>
+          )}
+
+          {step === 1 && (
+            <div className="space-y-2">
+              <p className="text-gray-600">Great! What's the occasion?</p>
+              <select
+                value={occasion}
+                onChange={handleOccasionChange}
+                className="w-full px-3 py-2 border rounded-md"
+              >
+                <option value="">Select Occasion</option>
+                <option value="wedding-wear">Wedding Wear</option>
+                <option value="casual-wear">Casual Wear</option>
+                <option value="office-wear">Office Wear</option>
+                <option value="party-wear">Party Wear</option>
+              </select>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div className="space-y-2">
+              <p className="text-gray-600">
+                What type of clothing are you looking for?
+              </p>
+              <select
+                value={clothingType}
+                onChange={handleClothingTypeChange}
+                className="w-full px-3 py-2 border rounded-md"
+              >
+                <option value="">Select Clothing Type</option>
+                <option value="both">Both</option>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+              </select>
+            </div>
+          )}
+
+          {step === 3 && clothingType && (
+            <div className="space-y-4">
+              {(clothingType === "top" || clothingType === "both") && (
+                <div>
+                  <p className="text-gray-600 font-semibold">
+                    Select a Top Size:
+                  </p>
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full bg-white">
+                      <thead>
+                        <tr>
+                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            Size
+                          </th>
+                          {gender !== "boys" && gender !== "girls" && (
+                            <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                              Bust (in)
+                            </th>
+                          )}
+                          {gender === "boys" || gender === "girls" ? (
+                            <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                              Chest (in)
+                            </th>
+                          ) : null}
+                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            Front-Length (in)
+                          </th>
+                          {gender !== "men" && (
+                            <>
+                              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                                Sleeve-Length (in)
+                              </th>
+                              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                                Waist (in)
+                              </th>
+                              {gender === "women" && (
+                                <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                                  Hips (in)
+                                </th>
+                              )}
+                            </>
+                          )}
+                          {gender !== "women" && (
+                            <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                              Across Shoulder (in)
+                            </th>
+                          )}
+                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            Select
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {top.map((row, index) => (
+                          <tr key={index} className="hover:bg-gray-100">
+                            <td className="px-4 py-2 border-b border-gray-300">
+                              {row.size}
+                            </td>
+                            {gender !== "boys" && gender !== "girls" && (
+                              <td className="px-4 py-2 border-b border-gray-300">
+                                {row.bust || row.chest}
+                              </td>
+                            )}
+                            {gender === "boys" || gender === "girls" ? (
+                              <td className="px-4 py-2 border-b border-gray-300">
+                                {row.chest}
+                              </td>
+                            ) : null}
+                            <td className="px-4 py-2 border-b border-gray-300">
+                              {row.frontlength}
+                            </td>
+                            {gender !== "men" && (
+                              <>
+                                <td className="px-4 py-2 border-b border-gray-300">
+                                  {row.sleevelength}
+                                </td>
+                                <td className="px-4 py-2 border-b border-gray-300">
+                                  {row.waist}
+                                </td>
+                                {gender === "women" && (
+                                  <td className="px-4 py-2 border-b border-gray-300">
+                                    {row.hips}
+                                  </td>
+                                )}
+                              </>
+                            )}
+                            {gender !== "women" && (
+                              <td className="px-4 py-2 border-b border-gray-300">
+                                {row.acrossshoulder}
+                              </td>
+                            )}
+                            <td className="px-4 py-2 border-b border-gray-300">
+                              <button
+                                className={`px-2 py-1 rounded-md ${
+                                  selectedSizes.top === row.size
+                                    ? "bg-blue-500 text-white"
+                                    : "bg-gray-300 text-gray-800"
+                                }`}
+                                onClick={() =>
+                                  handleSizeSelect("top", row.size)
+                                }
+                              >
+                                Select
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {(clothingType === "bottom" || clothingType === "both") && (
+                <div>
+                  <p className="text-gray-600 font-semibold">
+                    Select a Bottom Size:
+                  </p>
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full bg-white">
+                      <thead>
+                        <tr>
+                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            Size
+                          </th>
+                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            Waist (in)
+                          </th>
+                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            Inseam (in)
+                          </th>
+                          <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
+                            Select
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {bottom.map((row, index) => (
+                          <tr key={index} className="hover:bg-gray-100">
+                            <td className="px-4 py-2 border-b border-gray-300">
+                              {row.size}
+                            </td>
+                            <td className="px-4 py-2 border-b border-gray-300">
+                              {row.waist}
+                            </td>
+                            <td className="px-4 py-2 border-b border-gray-300">
+                              {row.inseamlength}
+                            </td>
+                            <td className="px-4 py-2 border-b border-gray-300">
+                              <button
+                                className={`px-2 py-1 rounded-md ${
+                                  selectedSizes.bottom === row.size
+                                    ? "bg-blue-500 text-white"
+                                    : "bg-gray-300 text-gray-800"
+                                }`}
+                                onClick={() =>
+                                  handleSizeSelect("bottom", row.size)
+                                }
+                              >
+                                Select
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className="space-y-2">
+              <p className="text-gray-600">
+                Thank you! Here's a summary of your selections:
+              </p>
+              <ul className="list-disc list-inside">
+                <li>
+                  <strong>Gender:</strong> {gender}
+                </li>
+                <li>
+                  <strong>Occasion:</strong> {occasion}
+                </li>
+                <li>
+                  <strong>Clothing Type:</strong> {clothingType}
+                </li>
+                <li>
+                  <strong>Top Size:</strong> {selectedSizes.top}
+                </li>
+                <li>
+                  <strong>Bottom Size:</strong> {selectedSizes.bottom}
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
-export default CustomizationForm;
+export default CustomizationChat;
