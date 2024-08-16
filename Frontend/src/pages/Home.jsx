@@ -12,7 +12,7 @@ const Home = () => {
           maria readymade aur designers cloth k liye naam bata
         </button>
         <button onClick={() => setCustomForm(true)} className="bg-white">
-          maria custom form k liye naam bata
+          Design Yours
         </button>
       </div>
       {customForm && (
