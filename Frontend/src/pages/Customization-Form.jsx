@@ -7,6 +7,30 @@ function CustomizationForm() {
   const [occasion, setOccasion] = useState("");
   const [clothingType, setClothingType] = useState("");
   const [selectedSizes, setSelectedSizes] = useState({ top: "", bottom: "" });
+  const [fabricType, setFabricType] = useState("");
+  const [customFabric, setCustomFabric] = useState("");
+  const [embroideryPlacement, setEmbroideryPlacement] = useState([]);
+  const [otherEmbroideryLocation, setOtherEmbroideryLocation] = useState("");
+  const [file, setFile] = useState(null);
+
+  const handleEmbroideryPlacementChange = (e) => {
+    const options = e.target.options;
+    const selectedValues = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedValues.push(options[i].value);
+      }
+    }
+    setEmbroideryPlacement(selectedValues);
+  };
+
+  const handleOtherEmbroideryLocationChange = (e) => {
+    setOtherEmbroideryLocation(e.target.value);
+  };
+
+  const handleFileUpload = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
@@ -30,6 +54,18 @@ function CustomizationForm() {
     }));
   };
 
+  const handleFabricTypeChange = (e) => {
+    setFabricType(e.target.value);
+    if (e.target.value !== "custom") {
+      setCustomFabric("");
+    }
+    setStep(step + 1);
+  };
+
+  const handleCustomFabricChange = (e) => {
+    setCustomFabric(e.target.value);
+  };
+
   const handleBack = () => {
     if (step > 0) {
       setStep(step - 1);
@@ -42,9 +78,72 @@ function CustomizationForm() {
     setOccasion("");
     setClothingType("");
     setSelectedSizes({ top: "", bottom: "" });
+    setFabricType("");
+    setCustomFabric("");
   };
 
   const handleNext = () => {
+    if (step === 0 && gender === "") {
+      alert("Please select a gender before proceeding.");
+      return;
+    }
+
+    if (step === 1 && occasion === "") {
+      alert("Please select an occasion before proceeding.");
+      return;
+    }
+
+    if (step === 2 && clothingType === "") {
+      alert("Please select a clothing type before proceeding.");
+      return;
+    }
+
+    if (step === 3) {
+      if (clothingType === "top" && selectedSizes.top === "") {
+        alert("Please select a top size before proceeding.");
+        return;
+      }
+
+      if (clothingType === "bottom" && selectedSizes.bottom === "") {
+        alert("Please select a bottom size before proceeding.");
+        return;
+      }
+
+      if (clothingType === "both") {
+        if (selectedSizes.top === "" && selectedSizes.bottom === "") {
+          alert("Please select both top and bottom sizes before proceeding.");
+          return;
+        }
+        if (selectedSizes.top === "") {
+          alert("Please select a top size before proceeding.");
+          return;
+        }
+        if (selectedSizes.bottom === "") {
+          alert("Please select a bottom size before proceeding.");
+          return;
+        }
+      }
+    }
+
+    if (step === 4) {
+      if (!fabricType || (fabricType === "custom" && !customFabric)) {
+        alert("Please select or specify a fabric type before proceeding.");
+        return;
+      }
+    }
+
+    if (step === 5) {
+      if (
+        !embroideryPlacement ||
+        (embroideryPlacement === "other" && !otherEmbroideryLocation)
+      ) {
+        alert(
+          "Please select an embroidery placement or specify the location if 'Other' is chosen."
+        );
+        return;
+      }
+    }
+
     setStep(step + 1);
   };
 
@@ -92,11 +191,12 @@ function CustomizationForm() {
           </div>
           {step === 0 && (
             <div className="space-y-2">
-              <p className="text-gray-600">Hi there! Who is this for?</p>
+              <p className="text-gray-600">Hi there! Who is this outfit for?</p>
               <select
                 value={gender}
                 onChange={handleGenderChange}
                 className="w-full px-3 py-2 border rounded-md"
+                required
               >
                 <option value="">Select Gender</option>
                 <option value="men">Men</option>
@@ -185,7 +285,8 @@ function CustomizationForm() {
                           )}
                           {gender !== "women" && (
                             <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                              Across Shoulder (in)
+                              Across
+                              <br /> Shoulder (in)
                             </th>
                           )}
                           <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
@@ -235,6 +336,7 @@ function CustomizationForm() {
                                 onChange={() =>
                                   handleSizeSelect("top", row.size)
                                 }
+                                checked={selectedSizes.top === row.size}
                               />
                             </td>
                           </tr>
@@ -303,6 +405,7 @@ function CustomizationForm() {
                                 onChange={() =>
                                   handleSizeSelect("bottom", row.size)
                                 }
+                                checked={selectedSizes.bottom === row.size}
                               />
                             </td>
                           </tr>
@@ -316,6 +419,105 @@ function CustomizationForm() {
           )}
 
           {step === 4 && (
+            <div className="space-y-2">
+              <p className="text-gray-600">
+                What type of fabric would you prefer for your outfit?
+              </p>
+              <select
+                value={fabricType}
+                onChange={handleFabricTypeChange}
+                className="w-full border border-gray-300 rounded-md px-2 py-1"
+              >
+                <option value="">Select Fabric Type</option>
+                <option value="cotton">Cotton</option>
+                <option value="linen">Linen</option>
+                <option value="silk">Silk</option>
+                <option value="wool">Wool</option>
+                <option value="denim">Denim</option>
+                <option value="polyester">Polyester</option>
+                <option value="rayon">Rayon</option>
+                <option value="spandex">Spandex</option>
+                <option value="velvet">Velvet</option>
+                <option value="chiffon">Chiffon</option>
+                <option value="satin">Satin</option>
+                <option value="crepe">Crepe</option>
+                <option value="twill">Twill</option>
+                <option value="custom">Other (Specify)</option>
+              </select>
+
+              {fabricType === "custom" && (
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    value={customFabric}
+                    onChange={handleCustomFabricChange}
+                    placeholder="Please specify your preferred fabric"
+                    className="w-full border border-gray-300 rounded-md px-2 py-1"
+                  />
+                </div>
+              )}
+
+              {((fabricType === "custom" && !customFabric) || !fabricType) && (
+                <p className="text-red-500 text-sm">
+                  Please select or specify a fabric type.
+                </p>
+              )}
+            </div>
+          )}
+
+          {step === 5 && (
+            <div className="space-y-4">
+              <p className="text-gray-600">
+                Would you like any embroidery on your outfit? If yes, where?
+              </p>
+              <select
+                multiple
+                value={embroideryPlacement}
+                onChange={handleEmbroideryPlacementChange}
+                className="w-full border border-gray-300 rounded-md px-2 py-1"
+              >
+                <option value="cuffs">Cuffs</option>
+                <option value="collars">Collars</option>
+                <option value="hem">Hem</option>
+                <option value="other">Other (please specify)</option>
+              </select>
+
+              {embroideryPlacement.length > 0 && (
+                <div className="mt-2 space-y-2">
+                  {embroideryPlacement.includes("other") && (
+                    <input
+                      type="text"
+                      value={otherEmbroideryLocation}
+                      onChange={handleOtherEmbroideryLocationChange}
+                      placeholder="Please specify embroidery location"
+                      className="w-full border border-gray-300 rounded-md px-2 py-1"
+                    />
+                  )}
+                  <input
+                    type="file"
+                    onChange={handleFileUpload}
+                    className="w-full border border-gray-300 rounded-md px-2 py-1"
+                  />
+                  {file && (
+                    <p className="text-gray-600 mt-2">
+                      Uploaded file: {file.name}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {(!embroideryPlacement.length ||
+                (embroideryPlacement.includes("other") &&
+                  !otherEmbroideryLocation)) && (
+                <p className="text-red-500 text-sm">
+                  Please select at least one embroidery placement option and
+                  upload a design.
+                </p>
+              )}
+            </div>
+          )}
+
+          {step === 6 && (
             <div className="space-y-4">
               <p className="text-gray-600 font-semibold">
                 You've completed the customization process!
@@ -349,13 +551,14 @@ function CustomizationForm() {
             Reset
           </button>
 
-          <button
-            className="px-4 py-2 bg-blue-500 text-white rounded-md"
-            onClick={handleNext}
-            disabled={step === 4}
-          >
-            Next
-          </button>
+          {step < 6 && (
+            <button
+              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          )}
         </div>
       </div>
     </div>
