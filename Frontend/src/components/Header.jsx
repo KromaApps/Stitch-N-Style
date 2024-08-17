@@ -4,6 +4,7 @@ import { Sidebar } from "./Sidebar/Sidebar";
 import { CiShoppingCart } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import darklogo from "../assets/darksns.png";
 
 const userNavigation = [
   { name: "Your Profile", to: "/profile" },
@@ -42,7 +43,7 @@ const Header = ({ customForm, setCustomForm }) => {
   const Logo = () => (
     <div className="md:w-5/12">
       <Link to="/">
-        <h2 className="text-white cursor-pointer">S&S</h2>
+        <img src={darklogo} alt="" width={200} />
       </Link>
     </div>
   );
@@ -100,7 +101,7 @@ const Header = ({ customForm, setCustomForm }) => {
           className={`${
             !customForm
               ? "bg-white text-black "
-              : "bg-black text-white shadow-md hover:bg-gray-100"
+              : "bg-black text-white shadow-md hover:bg-gray-200 hover:text-black/60"
           } border border-black py-2 px-4 rounded-lg transition duration-300 ease-in-out`}
         >
           Ready-fit
@@ -110,7 +111,7 @@ const Header = ({ customForm, setCustomForm }) => {
           className={`${
             customForm
               ? "bg-white text-black "
-              : "bg-black text-white shadow-md hover:bg-gray-100"
+              : "bg-black text-white shadow-md hover:bg-gray-200 hover:text-black/60"
           } border border-black py-2 px-4 rounded-lg transition duration-300 ease-in-out ml-2`}
         >
           Design Yours

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "./Banner.css";
-import img1 from "../assets/img.jpeg";
-import img2 from "../assets/img1.jpeg";
 
 const img = [
   "https://static3.azafashions.com/tr:w-1500/uploads/banner_templates/masaba-top-0819602001721982955.jpg",
-  img1,
-  img2,
+  "https://i.postimg.cc/x8L4d4dB/1.jpg",
+  "https://i.postimg.cc/tJmYY2mt/2.jpg",
+  "https://i.postimg.cc/g2cmfvSG/3.jpg",
 ];
 
 function Banner() {

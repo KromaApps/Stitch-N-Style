@@ -157,7 +157,7 @@ const Footer = () => {
               </a>
             </div>
             <div className="footer-section legal w-full text-center border-t border-gray-600 pt-5">
-              <p>&copy; 2024 Animal. All rights reserved.</p>
+              <p>&copy; 2024 Stitch & Style. All rights reserved.</p>
             </div>
             <div className="footer-image w-full flex justify-center mt-8">
               <img src={KromaApps} alt="Kroma-Apps" className="h-9" />

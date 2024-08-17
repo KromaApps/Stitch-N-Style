@@ -195,7 +195,7 @@ const Item = () => {
             id="sort"
             value={sortCriteria}
             onChange={(e) => setSortCriteria(e.target.value)}
-            className="p-2 rounded-md"
+            className="p-2 rounded-md border-2 border-slate-950"
           >
             <option value="name">Name</option>
             <option value="price">Price</option>
@@ -209,7 +209,7 @@ const Item = () => {
             id="filterSize"
             value={filterSize}
             onChange={(e) => setFilterSize(e.target.value)}
-            className="p-2 rounded-md"
+            className="p-2 rounded-md border-2 border-slate-950"
           >
             <option value="">All</option>
             {Array.from(
@@ -229,7 +229,7 @@ const Item = () => {
             id="filterColor"
             value={filterColor}
             onChange={(e) => setFilterColor(e.target.value)}
-            className="p-2 rounded-md"
+            className="p-2 rounded-md border-2 border-slate-950"
           >
             <option value="">All</option>
             {Array.from(
@@ -245,7 +245,7 @@ const Item = () => {
 
       <div className="flex flex-wrap justify-center">
         {sortedItems.map((item) => (
-          <div key={item.id} className="w-80 p-4">
+          <div key={item.id} className="w-[30rem] p-4">
             <ProductCard item={item} onAddToCart={handleAddToCart} />
           </div>
         ))}
