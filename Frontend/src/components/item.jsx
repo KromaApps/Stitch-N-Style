@@ -170,14 +170,23 @@ const Item = () => {
 
   const handleAddToCart = (item, selectedSize, selectedColor) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+
+    // Create a unique identifier for each item variation
+    const uniqueId = `${item.id}-${selectedSize}-${selectedColor}`;
+    const existingItem = cart.find(
+      (cartItem) => cartItem.uniqueId === uniqueId
+    );
 
     if (existingItem) {
       existingItem.quantity = (existingItem.quantity || 1) + 1;
-      existingItem.selectedSize = selectedSize;
-      existingItem.selectedColor = selectedColor;
     } else {
-      cart.push({ ...item, quantity: 1, selectedSize, selectedColor });
+      cart.push({
+        ...item,
+        quantity: 1,
+        selectedSize,
+        selectedColor,
+        uniqueId, // Add the unique identifier to each item
+      });
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
