@@ -82,7 +82,7 @@ const Header = ({ customForm, setCustomForm }) => {
   );
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 w-full items-center justify-between border-b border-gray-200 bg-black p-4">
+    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between  bg-black p-4">
       <div className="flex items-center">
         <Logo />
         <button
