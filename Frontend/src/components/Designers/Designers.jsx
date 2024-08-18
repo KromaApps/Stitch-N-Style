@@ -15,7 +15,7 @@ const Designers = () => {
         <h2 className="text-3xl font-extrabold text-center mb-12">
           Meet Our Designers
         </h2>
-        
+
         {/* Search Bar */}
         <div className="mb-8 flex justify-center">
           <input
