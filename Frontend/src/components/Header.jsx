@@ -1,19 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Sidebar } from "./Sidebar/Sidebar";
-// import { BsList } from "react-icons/bs";
 import { CiShoppingCart } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from "@headlessui/react";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import darklogo from "../assets/darksns.png";
 
 const userNavigation = [
   { name: "Your Profile", to: "/profile" },
@@ -28,7 +19,7 @@ const defaultUser = {
     "https://th.bing.com/th?id=OIP.jixXH_Els1MXBRmKFdMQPAHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2",
 };
 
-const Header = () => {
+const Header = ({ customForm, setCustomForm }) => {
   const [open, setOpen] = useState(false);
   const [itemCount, setItemCount] = useState(0);
   const user = JSON.parse(localStorage.getItem("user")) || defaultUser;
@@ -52,7 +43,7 @@ const Header = () => {
   const Logo = () => (
     <div className="md:w-5/12">
       <Link to="/">
-        <h2 className="text-white cursor-pointer">S&S</h2>
+        <img src={darklogo} alt="" width={200} />
       </Link>
     </div>
   );
@@ -91,7 +82,7 @@ const Header = () => {
   );
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 w-full items-center justify-between border-b border-gray-200 bg-gray-800 p-4">
+    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between  bg-black p-4">
       <div className="flex items-center">
         <Logo />
         <button
@@ -104,16 +95,39 @@ const Header = () => {
         </button>
         <Sidebar open={open} setOpen={setOpen} />
       </div>
+      <div>
+        <button
+          onClick={() => setCustomForm(false)}
+          className={`${
+            !customForm
+              ? "bg-white text-black "
+              : "bg-black text-white shadow-md hover:bg-gray-200 hover:text-black/60"
+          } border border-black py-2 px-4 rounded-lg transition duration-300 ease-in-out`}
+        >
+          Ready-fit
+        </button>
+        <button
+          onClick={() => setCustomForm(true)}
+          className={`${
+            customForm
+              ? "bg-white text-black "
+              : "bg-black text-white shadow-md hover:bg-gray-200 hover:text-black/60"
+          } border border-black py-2 px-4 rounded-lg transition duration-300 ease-in-out ml-2`}
+        >
+          Design Yours
+        </button>
+      </div>
       <div className="flex items-center">
-        <Link to="/cart">
-          <div className="relative p-2 text-gray-300 hover:text-white">
-            <CiShoppingCart className="h-8 w-8" />
-            {itemCount > 0 && (
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-medium text-white bg-red-500 rounded-full">
-                {itemCount}
-              </span>
-            )}
-          </div>
+        <Link
+          to="/cart"
+          className="relative p-2 text-gray-300 hover:text-white ml-4"
+        >
+          <CiShoppingCart className="h-8 w-8" />
+          {itemCount > 0 && (
+            <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-medium text-white bg-red-500 rounded-full">
+              {itemCount}
+            </span>
+          )}
         </Link>
         <MenuBar />
       </div>
