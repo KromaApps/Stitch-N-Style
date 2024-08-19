@@ -12,8 +12,8 @@ const Cart = () => {
     setCartItems(storedCart);
   }, []);
 
-  const handleRemove = (id) => {
-    const updatedCart = cartItems.filter((item) => item.id !== id);
+  const handleRemove = (uniqueId) => {
+    const updatedCart = cartItems.filter((item) => item.uniqueId !== uniqueId);
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
 
@@ -21,9 +21,9 @@ const Cart = () => {
     window.dispatchEvent(event);
   };
 
-  const handleQuantityChange = (id, increment) => {
+  const handleQuantityChange = (uniqueId, increment) => {
     const updatedCart = cartItems.map((item) => {
-      if (item.id === id) {
+      if (item.uniqueId === uniqueId) {
         return {
           ...item,
           quantity: increment
@@ -65,7 +65,7 @@ const Cart = () => {
         <div>
           {cartItems.map((item) => (
             <div
-              key={item.id}
+              key={item.uniqueId} // Use uniqueId here
               className="flex justify-between items-center mb-4 p-4 border border-gray-700 rounded-lg"
             >
               <div>
@@ -73,7 +73,7 @@ const Cart = () => {
                 <p className="text-gray-400">Price: ₹{item.price}</p>
                 <div className="flex items-center">
                   <button
-                    onClick={() => handleQuantityChange(item.id, false)}
+                    onClick={() => handleQuantityChange(item.uniqueId, false)}
                     className="bg-gray-600 text-white px-3 py-1 rounded"
                   >
                     -
@@ -82,7 +82,7 @@ const Cart = () => {
                     Quantity: {item.quantity || 1}
                   </span>
                   <button
-                    onClick={() => handleQuantityChange(item.id, true)}
+                    onClick={() => handleQuantityChange(item.uniqueId, true)}
                     className="bg-gray-600 text-white px-3 py-1 rounded"
                   >
                     +
@@ -95,7 +95,7 @@ const Cart = () => {
                 </p>
               </div>
               <button
-                onClick={() => handleRemove(item.id)}
+                onClick={() => handleRemove(item.uniqueId)} // Use uniqueId here
                 className="bg-red-600 text-white px-4 py-2 rounded"
               >
                 Remove
