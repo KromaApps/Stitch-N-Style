@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import designers from "../../data/designersData"; // Import the designer data
+import designers from "../../services/designersData"; // Import the designer data
 
 const Designers = () => {
   const [searchTerm, setSearchTerm] = useState("");

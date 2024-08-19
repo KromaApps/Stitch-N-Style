@@ -1,5 +1,5 @@
 import designerImage from "../assets/profile_picture.webp"; // Import the image
-import clothingItems from "../services/api"; // Import the clothing items
+import clothingItems from "./api"; // Import the clothing items
 
 const getItemById = (id) => clothingItems.find((item) => item.id === id);
 

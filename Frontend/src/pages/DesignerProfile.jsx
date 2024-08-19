@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import designers from "../data/designersData";
+import designers from "../services/designersData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag, faStar } from "@fortawesome/free-solid-svg-icons";
 import {
