@@ -18,7 +18,6 @@ const DesignerProfile = () => {
   const [success, setSuccess] = useState(null);
   const [cart, setCart] = useState([]);
 
-
   const designer = designers.find((d) => d.id === parseInt(designerId, 10));
 
   if (!designer)
@@ -34,12 +33,12 @@ const DesignerProfile = () => {
 
   const handleAddToCart = (item, selectedSize, selectedColor) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  
+
     const uniqueId = `${item.id}-${selectedSize}-${selectedColor}`;
     const existingItem = cart.find(
       (cartItem) => cartItem.uniqueId === uniqueId
     );
-  
+
     if (existingItem) {
       existingItem.quantity = (existingItem.quantity || 1) + 1;
     } else {
@@ -51,11 +50,11 @@ const DesignerProfile = () => {
         uniqueId,
       });
     }
-  
+
     localStorage.setItem("cart", JSON.stringify(cart));
     setCart(cart); // Update the local cart state
     window.dispatchEvent(new CustomEvent("cartUpdated"));
-  };  
+  };
 
   return (
     <div className="bg-gray-900 text-white min-h-screen p-8">

@@ -3,29 +3,33 @@ import PropTypes from "prop-types";
 
 const ProductCard = ({ item, onAddToCart, cart = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedSize, setSelectedSize] = useState(item.sizes?.[0] || ''); // Default to empty string if no sizes
-  const [selectedColor, setSelectedColor] = useState(item.colors?.[0] || ''); // Default to empty string if no colors
+  const [selectedSize, setSelectedSize] = useState(item.sizes?.[0] || ""); // Default to empty string if no sizes
+  const [selectedColor, setSelectedColor] = useState(item.colors?.[0] || ""); // Default to empty string if no colors
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
     if (!Array.isArray(cart)) {
-      console.error('Cart is not an array:', cart);
+      console.error("Cart is not an array:", cart);
       return;
     }
-    
+
     // Check if the item is in the cart
-    const found = cart.some(cartItem => cartItem.id === item.id);
+    const found = cart.some((cartItem) => cartItem.id === item.id);
     setIsInCart(found);
   }, [cart, item.id]);
 
   const handlePrevClick = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + (item.images || []).length) % (item.images || []).length
+      (prevIndex) =>
+        (prevIndex - 1 + (item.images || []).length) %
+        (item.images || []).length
     );
   };
 
   const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % (item.images || []).length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex + 1) % (item.images || []).length
+    );
   };
 
   const handleAddToCart = () => {
@@ -95,11 +99,13 @@ const ProductCard = ({ item, onAddToCart, cart = [] }) => {
         <button
           onClick={handleAddToCart}
           className={`w-full py-2 px-4 rounded ${
-            isInCart ? 'bg-gray-600 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500'
+            isInCart
+              ? "bg-gray-600 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-500"
           }`}
           disabled={isInCart}
         >
-          {isInCart ? 'In Cart' : 'Add to Cart'}
+          {isInCart ? "In Cart" : "Add to Cart"}
         </button>
       </div>
     </div>

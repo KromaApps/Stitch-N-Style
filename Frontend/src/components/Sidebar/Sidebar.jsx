@@ -16,11 +16,11 @@ export function Sidebar({ open, setOpen }) {
   const [option, setOption] = useState("category");
 
   return (
-    <header className="z-50">
+    <div className="z-[50]">
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
-        className="relative z-10"
+        className="relative z-50"
       >
         <DialogBackdrop
           transition
@@ -114,6 +114,6 @@ export function Sidebar({ open, setOpen }) {
           </div>
         </div>
       </Dialog>
-    </header>
+    </div>
   );
 }
