@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import designers from "../../services/designersData";
 
-export function TopDesignerSidebar() {
+export function TopDesignerSidebar({ setOpen }) {
   const featuredDesigners = designers.slice(0, 3);
 
   return (
@@ -12,6 +12,7 @@ export function TopDesignerSidebar() {
             key={designer.id}
             to={`/designers/${designer.id}`}
             className="flex text-black cursor-pointer my-1.5 p-1.5"
+            onClick={() => setOpen(false)}
           >
             <div className="align-center">
               <img
