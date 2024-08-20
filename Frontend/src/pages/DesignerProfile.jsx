@@ -8,7 +8,7 @@ import {
   faFacebook,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import ProductCard from "../components/Designers/ProductCard"; // Import the Card component
+import ProductCard from "../components/Designers/ProductCard";
 
 const DesignerProfile = () => {
   const { designerId } = useParams();
@@ -21,7 +21,7 @@ const DesignerProfile = () => {
   const designer = designers.find((d) => d.id === parseInt(designerId, 10));
 
   if (!designer)
-    return <div className="text-center p-4 text-white">Designer not found</div>;
+    return <div className="text-center p-4 text-black">Designer not found</div>;
 
   const handleMessageSubmit = (e) => {
     e.preventDefault();
@@ -52,12 +52,12 @@ const DesignerProfile = () => {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    setCart(cart); // Update the local cart state
+    setCart(cart);
     window.dispatchEvent(new CustomEvent("cartUpdated"));
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-8">
+    <div className="bg-white text-black min-h-screen p-8">
       <header className="text-center mb-12">
         <div className="relative mx-auto mb-6">
           {designer.image && (
@@ -168,7 +168,7 @@ const DesignerProfile = () => {
           designer.reviews.map((review) => (
             <div
               key={review.id}
-              className="mb-6 p-4 bg-gray-800 rounded-lg shadow-md transition-transform transform hover:scale-105"
+              className="mb-6 p-4 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105"
             >
               <p className="font-semibold mb-2">
                 {review.author || "Anonymous"}:
@@ -189,7 +189,7 @@ const DesignerProfile = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your Name"
-            className="w-full p-3 border border-gray-700 rounded-lg bg-gray-800 text-white"
+            className="w-full p-3 border border-gray-700 rounded-lg bg-white text-black"
             required
           />
           <input
@@ -197,7 +197,7 @@ const DesignerProfile = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Your Email"
-            className="w-full p-3 border border-gray-700 rounded-lg bg-gray-800 text-white"
+            className="w-full p-3 border border-gray-700 rounded-lg bg-white text-black"
             required
           />
           <textarea
@@ -205,12 +205,12 @@ const DesignerProfile = () => {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Your Message"
             rows="4"
-            className="w-full p-3 border border-gray-700 rounded-lg bg-gray-800 text-white"
+            className="w-full p-3 border border-gray-700 rounded-lg bg-white text-black"
             required
           />
           <button
             type="submit"
-            className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500"
+            className="w-full py-3 bg-black text-white font-semibold rounded-lg hover:bg-black/40"
           >
             Send Message
           </button>

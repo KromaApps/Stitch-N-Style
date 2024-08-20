@@ -10,7 +10,7 @@ const Designers = () => {
   );
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-8">
+    <div className="bg-white text-black min-h-screen p-8">
       <div className="container mx-auto">
         <h2 className="text-3xl font-extrabold text-center mb-12">
           Meet Our Designers
@@ -23,7 +23,7 @@ const Designers = () => {
             placeholder="Search for a designer..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-2 w-full md:w-1/2 lg:w-1/3 border rounded-md bg-gray-800 text-white placeholder-gray-400"
+            className="p-2 w-full md:w-1/2 lg:w-1/3 border border-black rounded-md bg-black/10  text-black "
           />
         </div>
 
@@ -31,7 +31,7 @@ const Designers = () => {
           {filteredDesigners.map((designer) => (
             <div
               key={designer.id}
-              className="bg-gray-800 p-6 rounded-lg shadow-lg text-center"
+              className="bg-black/10 p-6 rounded-lg shadow-lg text-center"
             >
               <img
                 src={designer.image}
@@ -41,7 +41,7 @@ const Designers = () => {
               <h3 className="text-xl font-semibold mb-4">{designer.name}</h3>
               <Link
                 to={`/designers/${designer.id}`}
-                className="text-green-500 hover:text-green-400"
+                className="text-black/80 hover:text-black/50"
               >
                 View Profile
               </Link>
