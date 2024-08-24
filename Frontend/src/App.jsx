@@ -28,6 +28,7 @@ function App() {
     <>
       <BrowserRouter>
         <Header customForm={customForm} setCustomForm={setCustomForm} />
+
         <Routes>
           <Route path="/" element={<Home customForm={customForm} />} />
           <Route path="/contact" element={<Contact />} />
