@@ -14,6 +14,7 @@ import {
   Profile,
   DesignerProfile,
   CustomizationForm,
+  LoginSignup,
 } from "./pages/index";
 import { Header, Footer } from "./components/index";
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/custom-form" element={<CustomizationForm />} />
+          <Route path="/login" element={<LoginSignup />} />
         </Routes>
         <Footer />
       </BrowserRouter>
