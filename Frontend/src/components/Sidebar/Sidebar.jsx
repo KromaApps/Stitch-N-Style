@@ -60,7 +60,7 @@ export function Sidebar({ open, setOpen }) {
                         onClick={() => setOption("category")}
                         className={`border p-2 rounded-lg ${
                           option === "category"
-                            ? "font-medium border-1 border-black/40 brightness-200 drop-shadow-2xl "
+                            ? "font-medium border-1 border-black/40 brightness-200 bg-black text-white drop-shadow-2xl focus:bg-black focus:text-white"
                             : "hover:bg-black hover:text-white"
                         }`}
                       >
@@ -70,7 +70,7 @@ export function Sidebar({ open, setOpen }) {
                         onClick={() => setOption("topDesigner")}
                         className={`border p-2 rounded-lg ${
                           option === "topDesigner"
-                            ? "font-medium border-1 border-black/40 brightness-200 drop-shadow-2xl"
+                            ? "font-medium border-1 border-black/40 brightness-200 drop-shadow-2xl focus:bg-black focus:text-white"
                             : "hover:bg-black hover:text-white"
                         }`}
                       >
