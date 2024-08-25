@@ -139,7 +139,7 @@ const ProductCard = ({ item, onAddToCart }) => {
   );
 };
 
-const Item = () => {
+const Item = ({ searchItem }) => {
   const [sortedItems, setSortedItems] = useState(clothingItems);
   const [sortCriteria, setSortCriteria] = useState("name");
   const [filterSize, setFilterSize] = useState("");
@@ -156,6 +156,12 @@ const Item = () => {
       items = items.filter((item) => item.colors.includes(filterColor));
     }
 
+    if (searchItem) {
+      items = items.filter((item) =>
+        item.name.toLowerCase().includes(searchItem.toLowerCase())
+      );
+    }
+
     items.sort((a, b) => {
       if (sortCriteria === "price") {
         return a.price - b.price;
@@ -166,7 +172,7 @@ const Item = () => {
     });
 
     setSortedItems(items);
-  }, [sortCriteria, filterSize, filterColor]);
+  }, [sortCriteria, filterSize, filterColor, searchItem]);
 
   const handleAddToCart = (item, selectedSize, selectedColor) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
