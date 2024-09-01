@@ -1,19 +1,23 @@
 import React from "react";
 
 const GenderChange = ({ gender, handleGenderChange }) => (
-  <div className="space-y-2">
-    <p className="text-gray-600">Hi there! Who is this for?</p>
-    <select
-      value={gender}
-      onChange={handleGenderChange}
-      className="w-full px-3 py-2 border rounded-md"
-    >
-      <option value="">Select Gender</option>
-      <option value="men">Men</option>
-      <option value="women">Women</option>
-      <option value="girls">Girls</option>
-      <option value="boys">Boys</option>
-    </select>
+  <div>
+    <p className="text-gray-600 text-lg font-medium mb-4">Select Gender:</p>
+    <div className="flex flex-col space-y-2">
+      {["men", "women", "boys", "girls"].map((g) => (
+        <label key={g} className="flex items-center space-x-2">
+          <input
+            type="radio"
+            name="gender"
+            value={g}
+            checked={gender === g}
+            onChange={handleGenderChange}
+            className="form-radio"
+          />
+          <span className="text-gray-800 capitalize">{g}</span>
+        </label>
+      ))}
+    </div>
   </div>
 );
 

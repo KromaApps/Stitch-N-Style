@@ -1,568 +1,155 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import sizeCharts from "../services/sizeapi";
+import Back from "../components/CustomForm/Back";
+import ClothingTypeChange from "../components/CustomForm/ClothingTypeChange";
+import GenderChange from "../components/CustomForm/GenderChange";
+import OccasionChange from "../components/CustomForm/OccasionChange";
+import Reset from "../components/CustomForm/Reset";
+import SizeSelect from "../components/CustomForm/SizeSelect";
+import Next from "../components/CustomForm/Next";
+import Review from "../components/CustomForm/Review";
 
-function CustomizationForm() {
+const CustomizationForm = () => {
   const [step, setStep] = useState(0);
   const [gender, setGender] = useState("");
-  const [occasion, setOccasion] = useState("");
   const [clothingType, setClothingType] = useState("");
-  const [selectedSizes, setSelectedSizes] = useState({ top: "", bottom: "" });
-  const [fabricType, setFabricType] = useState("");
-  const [customFabric, setCustomFabric] = useState("");
-  const [embroideryPlacement, setEmbroideryPlacement] = useState([]);
-  const [otherEmbroideryLocation, setOtherEmbroideryLocation] = useState("");
-  const [file, setFile] = useState(null);
+  const [occasion, setOccasion] = useState("");
+  const [selectedSize, setSelectedSize] = useState({ top: "", bottom: "" });
 
-  const handleEmbroideryPlacementChange = (e) => {
-    const options = e.target.options;
-    const selectedValues = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedValues.push(options[i].value);
-      }
-    }
-    setEmbroideryPlacement(selectedValues);
-  };
-
-  const handleOtherEmbroideryLocationChange = (e) => {
-    setOtherEmbroideryLocation(e.target.value);
-  };
-
-  const handleFileUpload = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const handleGenderChange = (e) => {
-    setGender(e.target.value);
-    setStep(step + 1);
-  };
-
-  const handleOccasionChange = (e) => {
-    setOccasion(e.target.value);
-    setStep(step + 1);
-  };
-
-  const handleClothingTypeChange = (e) => {
-    setClothingType(e.target.value);
-    setStep(step + 1);
-  };
-
+  const handleGenderChange = (event) => setGender(event.target.value);
+  const handleClothingTypeChange = (event) =>
+    setClothingType(event.target.value);
+  const handleOccasionChange = (event) => setOccasion(event.target.value);
   const handleSizeSelect = (type, size) => {
-    setSelectedSizes((prevSizes) => ({
-      ...prevSizes,
+    console.log(`Size selected: ${type} - ${size}`); // Debug log
+    setSelectedSize((prev) => ({
+      ...prev,
       [type]: size,
     }));
   };
 
-  const handleFabricTypeChange = (e) => {
-    setFabricType(e.target.value);
-    if (e.target.value !== "custom") {
-      setCustomFabric("");
+  // In CustomizationForm
+  useEffect(() => {
+    console.log("Updated Selected Size:", selectedSize);
+  }, [selectedSize]);
+
+  const handleNext = () => {
+    console.log("Selected size (top):", selectedSize.top);
+    console.log("Selected size (bottom):", selectedSize.bottom);
+
+    if (step === 0 && !gender) {
+      alert("Please select a gender.");
+    } else if (step === 1 && !clothingType) {
+      alert("Please select a clothing type.");
+    } else if (step === 2 && !occasion) {
+      alert("Please select an occasion.");
+    } else if (step === 3) {
+      if (clothingType.includes("top") && !selectedSize.top) {
+        alert("Please select a top size.");
+      } else if (clothingType.includes("bottom") && !selectedSize.bottom) {
+        alert("Please select a bottom size.");
+      } else {
+        setStep((prevStep) => prevStep + 1);
+      }
+    } else {
+      setStep((prevStep) => prevStep + 1);
     }
-    setStep(step + 1);
   };
 
-  const handleCustomFabricChange = (e) => {
-    setCustomFabric(e.target.value);
-  };
-
-  const handleBack = () => {
-    if (step > 0) {
-      setStep(step - 1);
-    }
-  };
-
+  const handleBack = () => setStep((prevStep) => prevStep - 1);
   const handleReset = () => {
     setStep(0);
     setGender("");
-    setOccasion("");
     setClothingType("");
-    setSelectedSizes({ top: "", bottom: "" });
-    setFabricType("");
-    setCustomFabric("");
+    setOccasion("");
+    setSelectedSize({ top: "", bottom: "" });
   };
 
-  const handleNext = () => {
-    if (step === 0 && gender === "") {
-      alert("Please select a gender before proceeding.");
-      return;
-    }
-
-    if (step === 1 && occasion === "") {
-      alert("Please select an occasion before proceeding.");
-      return;
-    }
-
-    if (step === 2 && clothingType === "") {
-      alert("Please select a clothing type before proceeding.");
-      return;
-    }
-
-    if (step === 3) {
-      if (clothingType === "top" && selectedSizes.top === "") {
-        alert("Please select a top size before proceeding.");
-        return;
-      }
-
-      if (clothingType === "bottom" && selectedSizes.bottom === "") {
-        alert("Please select a bottom size before proceeding.");
-        return;
-      }
-
-      if (clothingType === "both") {
-        if (selectedSizes.top === "" && selectedSizes.bottom === "") {
-          alert("Please select both top and bottom sizes before proceeding.");
-          return;
-        }
-        if (selectedSizes.top === "") {
-          alert("Please select a top size before proceeding.");
-          return;
-        }
-        if (selectedSizes.bottom === "") {
-          alert("Please select a bottom size before proceeding.");
-          return;
-        }
-      }
-    }
-
-    if (step === 4) {
-      if (!fabricType || (fabricType === "custom" && !customFabric)) {
-        alert("Please select or specify a fabric type before proceeding.");
-        return;
-      }
-    }
-
-    if (step === 5) {
-      if (
-        !embroideryPlacement ||
-        (embroideryPlacement === "other" && !otherEmbroideryLocation)
-      ) {
-        alert(
-          "Please select an embroidery placement or specify the location if 'Other' is chosen."
-        );
-        return;
-      }
-    }
-
-    setStep(step + 1);
+  const getTopSizeData = () => {
+    if (gender === "women") return sizeCharts.women.womenTop;
+    if (gender === "men") return sizeCharts.men.mensUpperWear;
+    if (gender === "boys") return sizeCharts.boys.boysUpperWear;
+    if (gender === "girls") return sizeCharts.girls.girlsTop;
+    return [];
   };
 
-  const handleFinish = () => {
-    setStep(step + 1);
+  const getBottomSizeData = () => {
+    if (gender === "women") return sizeCharts.women.WomenBottom;
+    if (gender === "men") return sizeCharts.men.mensBottom;
+    if (gender === "boys") return sizeCharts.boys.boysBottom;
+    if (gender === "girls") return sizeCharts.girls.girlsBottom;
+    return [];
   };
-
-  const getSizeChartData = () => {
-    switch (gender) {
-      case "men":
-        return {
-          top: sizeCharts.men.mensUpperWear,
-          bottom: sizeCharts.men.mensBottom,
-        };
-      case "women":
-        return {
-          top: sizeCharts.women.womenTop,
-          bottom: sizeCharts.women.WomenBottom,
-        };
-      case "boys":
-        return {
-          top: sizeCharts.boys.boysUpperWear,
-          bottom: sizeCharts.boys.boysBottom,
-        };
-      case "girls":
-        return {
-          top: sizeCharts.girls.girlsTop,
-          bottom: sizeCharts.girls.girlsBottom,
-        };
-      default:
-        return { top: [], bottom: [] };
-    }
-  };
-
-  const { top, bottom } = getSizeChartData();
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-      <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-md">
-        <div className="space-y-4">
-          <div className="text-center">
-            <p className="text-lg font-semibold text-gray-700">
-              Welcome to the Fashion Customization!
-            </p>
-          </div>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-6 px-4">
+      <div className="w-full max-w-lg bg-white shadow-md rounded-lg p-6">
+        <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+          Customize Your Apparel
+        </h1>
+        <div className="form-steps">
           {step === 0 && (
-            <div className="space-y-2">
-              <p className="text-gray-600">Hi there! Who is this outfit for?</p>
-              <select
-                value={gender}
-                onChange={handleGenderChange}
-                className="w-full px-3 py-2 border rounded-md"
-                required
-              >
-                <option value="">Select Gender</option>
-                <option value="men">Men</option>
-                <option value="women">Women</option>
-                <option value="girls">Girls</option>
-                <option value="boys">Boys</option>
-              </select>
-            </div>
+            <GenderChange
+              gender={gender}
+              handleGenderChange={handleGenderChange}
+            />
           )}
-
           {step === 1 && (
-            <div className="space-y-2">
-              <p className="text-gray-600">Great! What's the occasion?</p>
-              <select
-                value={occasion}
-                onChange={handleOccasionChange}
-                className="w-full px-3 py-2 border rounded-md"
-              >
-                <option value="">Select Occasion</option>
-                <option value="wedding-wear">Wedding Wear</option>
-                <option value="casual-wear">Casual Wear</option>
-                <option value="office-wear">Office Wear</option>
-                <option value="party-wear">Party Wear</option>
-              </select>
-            </div>
+            <ClothingTypeChange
+              clothingType={clothingType}
+              handleClothingTypeChange={handleClothingTypeChange}
+            />
           )}
-
           {step === 2 && (
-            <div className="space-y-2">
-              <p className="text-gray-600">
-                What type of clothing are you looking for?
-              </p>
-              <select
-                value={clothingType}
-                onChange={handleClothingTypeChange}
-                className="w-full px-3 py-2 border rounded-md"
-              >
-                <option value="">Select Clothing Type</option>
-                <option value="both">Both</option>
-                <option value="top">Top</option>
-                <option value="bottom">Bottom</option>
-              </select>
-            </div>
+            <OccasionChange
+              occasion={occasion}
+              handleOccasionChange={handleOccasionChange}
+            />
           )}
-
-          {step === 3 && clothingType && (
-            <div className="space-y-4">
-              {(clothingType === "top" || clothingType === "both") && (
-                <div>
-                  <p className="text-gray-600 font-semibold">
-                    Select a Top Size:
-                  </p>
-                  <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white">
-                      <thead>
-                        <tr>
-                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                            Size
-                          </th>
-                          {gender !== "boys" && gender !== "girls" && (
-                            <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                              Bust (in)
-                            </th>
-                          )}
-                          {gender === "boys" || gender === "girls" ? (
-                            <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                              Chest (in)
-                            </th>
-                          ) : null}
-                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                            Front-
-                            <br />
-                            Length (in)
-                          </th>
-                          {gender !== "men" && (
-                            <>
-                              <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                                Sleeve
-                                <br />
-                                -Length (in)
-                              </th>
-                              <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                                Waist (in)
-                              </th>
-                            </>
-                          )}
-                          {gender !== "women" && (
-                            <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                              Across
-                              <br /> Shoulder (in)
-                            </th>
-                          )}
-                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                            Select
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {top.map((row, index) => (
-                          <tr key={index} className="hover:bg-gray-100">
-                            <td className="px-0.5 py-2 border-b border-gray-300">
-                              {row.size}
-                            </td>
-                            {gender !== "boys" && gender !== "girls" && (
-                              <td className="px-0.5 py-2 border-b border-gray-300">
-                                {row.bust || row.chest}
-                              </td>
-                            )}
-                            {gender === "boys" || gender === "girls" ? (
-                              <td className="px-0.5 py-2 border-b border-gray-300">
-                                {row.chest}
-                              </td>
-                            ) : null}
-                            <td className="px-0.5 py-2 border-b border-gray-300">
-                              {row.frontlength}
-                            </td>
-                            {gender !== "men" && (
-                              <>
-                                <td className="px-0.5 py-2 border-b border-gray-300">
-                                  {row.sleevelength}
-                                </td>
-                                <td className="px-0.5 py-2 border-b border-gray-300">
-                                  {row.waist}
-                                </td>
-                              </>
-                            )}
-                            {gender !== "women" && (
-                              <td className="px-0.5 py-2 border-b border-gray-300">
-                                {row.acrossshoulder}
-                              </td>
-                            )}
-                            <td className="px-0.5 py-2 border-b border-gray-300">
-                              <input
-                                type="radio"
-                                name="topSize"
-                                value={row.size}
-                                onChange={() =>
-                                  handleSizeSelect("top", row.size)
-                                }
-                                checked={selectedSizes.top === row.size}
-                              />
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
-              {(clothingType === "bottom" || clothingType === "both") && (
-                <div>
-                  <p className="text-gray-600 font-semibold">
-                    Select a Bottom Size:
-                  </p>
-                  <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white">
-                      <thead>
-                        <tr>
-                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                            Size
-                          </th>
-                          {gender !== "boys" && gender !== "girls" && (
-                            <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                              Waist (in)
-                            </th>
-                          )}
-                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                            Hip (in)
-                          </th>
-                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                            Inseam (in)
-                          </th>
-                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                            Outseam (in)
-                          </th>
-                          <th className="px-0.5 py-2 border-b-2 border-gray-300 text-left text-xs leading-4 text-gray-800">
-                            Select
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {bottom.map((row, index) => (
-                          <tr key={index} className="hover:bg-gray-100">
-                            <td className="px-0.5 py-2 border-b border-gray-300">
-                              {row.size}
-                            </td>
-                            {gender !== "boys" && gender !== "girls" && (
-                              <td className="px-0.5 py-2 border-b border-gray-300">
-                                {row.waist}
-                              </td>
-                            )}
-                            <td className="px-0.5 py-2 border-b border-gray-300">
-                              {row.hips}
-                            </td>
-                            <td className="px-0.5 py-2 border-b border-gray-300">
-                              {row.inseamlength}
-                            </td>
-                            <td className="px-0.5 py-2 border-b border-gray-300">
-                              {row.outseamlength}
-                            </td>
-                            <td className="px-0.5 py-2 border-b border-gray-300">
-                              <input
-                                type="radio"
-                                name="bottomSize"
-                                value={row.size}
-                                onChange={() =>
-                                  handleSizeSelect("bottom", row.size)
-                                }
-                                checked={selectedSizes.bottom === row.size}
-                              />
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
-            </div>
+          {step === 3 && (
+            <SizeSelect
+              clothingType={clothingType}
+              gender={gender}
+              top={getTopSizeData()}
+              bottom={getBottomSizeData()}
+              handleSizeSelect={handleSizeSelect}
+              selectedSize={selectedSize} // Make sure this is passed
+            />
           )}
-
           {step === 4 && (
-            <div className="space-y-2">
-              <p className="text-gray-600">
-                What type of fabric would you prefer for your outfit?
-              </p>
-              <select
-                value={fabricType}
-                onChange={handleFabricTypeChange}
-                className="w-full border border-gray-300 rounded-md px-2 py-1"
-              >
-                <option value="">Select Fabric Type</option>
-                <option value="cotton">Cotton</option>
-                <option value="linen">Linen</option>
-                <option value="silk">Silk</option>
-                <option value="wool">Wool</option>
-                <option value="denim">Denim</option>
-                <option value="polyester">Polyester</option>
-                <option value="rayon">Rayon</option>
-                <option value="spandex">Spandex</option>
-                <option value="velvet">Velvet</option>
-                <option value="chiffon">Chiffon</option>
-                <option value="satin">Satin</option>
-                <option value="crepe">Crepe</option>
-                <option value="twill">Twill</option>
-                <option value="custom">Other (Specify)</option>
-              </select>
-
-              {fabricType === "custom" && (
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    value={customFabric}
-                    onChange={handleCustomFabricChange}
-                    placeholder="Please specify your preferred fabric"
-                    className="w-full border border-gray-300 rounded-md px-2 py-1"
-                  />
-                </div>
-              )}
-
-              {((fabricType === "custom" && !customFabric) || !fabricType) && (
-                <p className="text-red-500 text-sm">
-                  Please select or specify a fabric type.
-                </p>
-              )}
-            </div>
-          )}
-
-          {step === 5 && (
-            <div className="space-y-4">
-              <p className="text-gray-600">
-                Would you like any embroidery on your outfit? If yes, where?
-              </p>
-              <select
-                multiple
-                value={embroideryPlacement}
-                onChange={handleEmbroideryPlacementChange}
-                className="w-full border border-gray-300 rounded-md px-2 py-1"
-              >
-                <option value="cuffs">Cuffs</option>
-                <option value="collars">Collars</option>
-                <option value="hem">Hem</option>
-                <option value="other">Other (please specify)</option>
-              </select>
-
-              {embroideryPlacement.length > 0 && (
-                <div className="mt-2 space-y-2">
-                  {embroideryPlacement.includes("other") && (
-                    <input
-                      type="text"
-                      value={otherEmbroideryLocation}
-                      onChange={handleOtherEmbroideryLocationChange}
-                      placeholder="Please specify embroidery location"
-                      className="w-full border border-gray-300 rounded-md px-2 py-1"
-                    />
-                  )}
-                  <input
-                    type="file"
-                    onChange={handleFileUpload}
-                    className="w-full border border-gray-300 rounded-md px-2 py-1"
-                  />
-                  {file && (
-                    <p className="text-gray-600 mt-2">
-                      Uploaded file: {file.name}
-                    </p>
-                  )}
-                </div>
-              )}
-
-              {(!embroideryPlacement.length ||
-                (embroideryPlacement.includes("other") &&
-                  !otherEmbroideryLocation)) && (
-                <p className="text-red-500 text-sm">
-                  Please select at least one embroidery placement option and
-                  upload a design.
-                </p>
-              )}
-            </div>
-          )}
-
-          {step === 6 && (
-            <div className="space-y-4">
-              <p className="text-gray-600 font-semibold">
-                You've completed the customization process!
-              </p>
-              <p className="text-gray-600">Your selected sizes are:</p>
-              <ul>
-                <li>Top: {selectedSizes.top}</li>
-                <li>Bottom: {selectedSizes.bottom}</li>
-              </ul>
-              <button
-                className="px-4 py-2 bg-green-500 text-white rounded-md"
-                onClick={handleFinish}
-              >
-                Finish
-              </button>
-            </div>
+            <Review
+              gender={gender}
+              clothingType={clothingType}
+              occasion={occasion}
+              selectedSize={selectedSize}
+            />
           )}
         </div>
-        <div className="flex justify-between mt-4">
-          <button
-            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"
-            onClick={handleBack}
-            disabled={step === 0}
-          >
-            Back
-          </button>
-          <button
-            className="px-4 py-2 bg-red-500 text-white rounded-md"
-            onClick={handleReset}
-          >
-            Reset
-          </button>
 
-          {step < 6 && (
-            <button
-              className="px-4 py-2 bg-blue-500 text-white rounded-md"
-              onClick={handleNext}
-            >
-              Next
-            </button>
+        <div className="mt-6 flex items-center justify-between">
+          {step === 0 ? (
+            <div className="flex-grow text-right">
+              <Next handleNext={handleNext} />
+            </div>
+          ) : (
+            <>
+              {step > 0 && (
+                <div className="flex-grow text-left">
+                  <Back handleBack={handleBack} />
+                </div>
+              )}
+              <div className="flex-grow text-center">
+                <Reset handleReset={handleReset} />
+              </div>
+              <div className="flex-grow text-right">
+                {step < 4 && <Next handleNext={handleNext} />}
+              </div>
+            </>
           )}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default CustomizationForm;

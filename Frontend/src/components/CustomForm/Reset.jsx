@@ -1,12 +1,8 @@
 import React from "react";
+import Button from "./Button";
 
 const Reset = ({ handleReset }) => (
-  <button
-    className="px-4 py-2 bg-red-500 text-white rounded-md"
-    onClick={handleReset}
-  >
-    Reset
-  </button>
+  <Button onClick={handleReset} label="Reset" color="red" />
 );
 
 export default Reset;

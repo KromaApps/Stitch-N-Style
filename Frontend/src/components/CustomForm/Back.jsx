@@ -1,13 +1,8 @@
 import React from "react";
+import Button from "./Button.jsx";
 
-const Back = ({ step, handleBack }) => (
-  <button
-    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"
-    onClick={handleBack}
-    disabled={step === 0}
-  >
-    Back
-  </button>
+const Back = ({ handleBack }) => (
+  <Button onClick={handleBack} label="Back" color="gray" />
 );
 
 export default Back;
