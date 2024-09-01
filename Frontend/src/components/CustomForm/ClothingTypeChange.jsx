@@ -1,18 +1,25 @@
 import React from "react";
 
 const ClothingTypeChange = ({ clothingType, handleClothingTypeChange }) => (
-  <div className="space-y-2">
-    <p className="text-gray-600">What type of clothing are you looking for?</p>
-    <select
-      value={clothingType}
-      onChange={handleClothingTypeChange}
-      className="w-full px-3 py-2 border rounded-md"
-    >
-      <option value="">Select Clothing Type</option>
-      <option value="both">Both</option>
-      <option value="top">Top</option>
-      <option value="bottom">Bottom</option>
-    </select>
+  <div>
+    <p className="text-gray-600 text-lg font-medium mb-4">
+      Select Clothing Type:
+    </p>
+    <div className="flex flex-col space-y-2">
+      {["top", "bottom", "both"].map((type) => (
+        <label key={type} className="flex items-center space-x-2">
+          <input
+            type="radio"
+            name="clothingType"
+            value={type}
+            checked={clothingType === type}
+            onChange={handleClothingTypeChange}
+            className="form-radio"
+          />
+          <span className="text-gray-800 capitalize">{type}</span>
+        </label>
+      ))}
+    </div>
   </div>
 );
 
