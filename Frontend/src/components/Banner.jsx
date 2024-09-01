@@ -28,7 +28,7 @@ function Banner() {
   return (
     <div className="relative flex h-[70vh] overflow-hidden items-center p-2 mb-5">
       <button
-        className="absolute left-2 z-10 bg-gray-700 text-white p-2 rounded-full"
+        className="absolute left-2 z-[1] bg-gray-700 text-white p-2 rounded-full"
         onClick={handlePrev}
       >
         &lt;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import clothingItems from "../services/itemapi";
+import clothingItems from "../services/api";
 
 const ProductCard = ({ item, onAddToCart }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -139,7 +139,7 @@ const ProductCard = ({ item, onAddToCart }) => {
   );
 };
 
-const Item = () => {
+const Item = ({ searchItem }) => {
   const [sortedItems, setSortedItems] = useState(clothingItems);
   const [sortCriteria, setSortCriteria] = useState("name");
   const [filterSize, setFilterSize] = useState("");
@@ -156,6 +156,12 @@ const Item = () => {
       items = items.filter((item) => item.colors.includes(filterColor));
     }
 
+    if (searchItem) {
+      items = items.filter((item) =>
+        item.name.toLowerCase().includes(searchItem.toLowerCase())
+      );
+    }
+
     items.sort((a, b) => {
       if (sortCriteria === "price") {
         return a.price - b.price;
@@ -166,7 +172,7 @@ const Item = () => {
     });
 
     setSortedItems(items);
-  }, [sortCriteria, filterSize, filterColor]);
+  }, [sortCriteria, filterSize, filterColor, searchItem]);
 
   const handleAddToCart = (item, selectedSize, selectedColor) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -197,28 +203,28 @@ const Item = () => {
     <div>
       <div className="flex justify-between items-center mb-4">
         <div>
-          <label htmlFor="sort" className="mr-2 text-black">
+          <label htmlFor="sort" className="mr-2 text-white">
             Sort by:
           </label>
           <select
             id="sort"
             value={sortCriteria}
             onChange={(e) => setSortCriteria(e.target.value)}
-            className="p-2 rounded-md border-2 border-slate-950"
+            className="p-2 rounded-md"
           >
             <option value="name">Name</option>
             <option value="price">Price</option>
           </select>
         </div>
         <div>
-          <label htmlFor="filterSize" className="mr-2 text-black">
+          <label htmlFor="filterSize" className="mr-2 text-white">
             Filter by Size:
           </label>
           <select
             id="filterSize"
             value={filterSize}
             onChange={(e) => setFilterSize(e.target.value)}
-            className="p-2 rounded-md border-2 border-slate-950"
+            className="p-2 rounded-md"
           >
             <option value="">All</option>
             {Array.from(
@@ -231,14 +237,14 @@ const Item = () => {
           </select>
         </div>
         <div>
-          <label htmlFor="filterColor" className="mr-2 text-black">
+          <label htmlFor="filterColor" className="mr-2 text-white">
             Filter by Color:
           </label>
           <select
             id="filterColor"
             value={filterColor}
             onChange={(e) => setFilterColor(e.target.value)}
-            className="p-2 rounded-md border-2 border-slate-950"
+            className="p-2 rounded-md"
           >
             <option value="">All</option>
             {Array.from(
@@ -254,7 +260,7 @@ const Item = () => {
 
       <div className="flex flex-wrap justify-center">
         {sortedItems.map((item) => (
-          <div key={item.id} className="w-[30rem] p-4">
+          <div key={item.id} className="w-80 p-4">
             <ProductCard item={item} onAddToCart={handleAddToCart} />
           </div>
         ))}

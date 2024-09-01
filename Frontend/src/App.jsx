@@ -14,6 +14,7 @@ import {
   Profile,
   DesignerProfile,
   CustomizationForm,
+  LoginSignup,
 } from "./pages/index";
 import { Header, Footer } from "./components/index";
 
@@ -27,6 +28,7 @@ function App() {
     <>
       <BrowserRouter>
         <Header customForm={customForm} setCustomForm={setCustomForm} />
+
         <Routes>
           <Route path="/" element={<Home customForm={customForm} />} />
           <Route path="/contact" element={<Contact />} />
@@ -41,12 +43,12 @@ function App() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/custom-form" element={<CustomizationForm />} />
+          <Route path="/login" element={<LoginSignup />} />
         </Routes>
         <Footer />
       </BrowserRouter>
     </>
   );
 }
-
 
 export default App;

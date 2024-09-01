@@ -49,7 +49,7 @@ const Header = ({ customForm, setCustomForm }) => {
   );
 
   const MenuBar = () => (
-    <Menu as="div" className="relative ml-3">
+    <Menu as="div" className="relative ml-3 ">
       <div>
         <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none">
           <span className="sr-only">Open user menu</span>
@@ -60,7 +60,7 @@ const Header = ({ customForm, setCustomForm }) => {
           />
         </MenuButton>
       </div>
-      <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+      <MenuItems className="absolute right-0  mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div className="p-1">
           {userNavigation.map((item) => (
             <MenuItem key={item.name}>
@@ -82,12 +82,12 @@ const Header = ({ customForm, setCustomForm }) => {
   );
 
   return (
-    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between  bg-black p-4">
+    <div className="sticky top-0 z-[2] flex h-16 w-full items-center justify-between border-b border-gray-200 bg-black p-4">
       <div className="flex items-center">
         <Logo />
         <button
           type="button"
-          className="ml-4 inline-flex items-center p-2 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-600"
+          className="ml-4 inline-flex items-center p-2 text-gray-400 hover:bg-gray-700  "
           onClick={() => setOpen(!open)}
         >
           <span className="sr-only">Open main menu</span>
@@ -131,7 +131,7 @@ const Header = ({ customForm, setCustomForm }) => {
         </Link>
         <MenuBar />
       </div>
-    </header>
+    </div>
   );
 };
 

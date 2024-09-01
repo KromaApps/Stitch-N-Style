@@ -16,11 +16,11 @@ export function Sidebar({ open, setOpen }) {
   const [option, setOption] = useState("category");
 
   return (
-    <header>
+    <div className="z-[50]">
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
-        className="relative z-10"
+        className="relative z-50"
       >
         <DialogBackdrop
           transition
@@ -46,7 +46,7 @@ export function Sidebar({ open, setOpen }) {
                     </button>
                   </div>
                 </TransitionChild>
-                <div className="flex h-full z-50 flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                   <div className="px-4 sm:px-6">
                     <DialogTitle className="text-base font-semibold leading-6 text-gray-900">
                       Show top offer Advertisement Here if no advertisement
@@ -60,7 +60,7 @@ export function Sidebar({ open, setOpen }) {
                         onClick={() => setOption("category")}
                         className={`border p-2 rounded-lg ${
                           option === "category"
-                            ? "font-medium border-1 border-black/40 brightness-200 drop-shadow-2xl "
+                            ? "font-medium border-1 border-black/40 brightness-200 bg-black text-white drop-shadow-2xl focus:bg-black focus:text-white"
                             : "hover:bg-black hover:text-white"
                         }`}
                       >
@@ -70,7 +70,7 @@ export function Sidebar({ open, setOpen }) {
                         onClick={() => setOption("topDesigner")}
                         className={`border p-2 rounded-lg ${
                           option === "topDesigner"
-                            ? "font-medium border-1 border-black/40 brightness-200 drop-shadow-2xl"
+                            ? "font-medium border-1 border-black/40 brightness-200 drop-shadow-2xl focus:bg-black focus:text-white"
                             : "hover:bg-black hover:text-white"
                         }`}
                       >
@@ -114,6 +114,6 @@ export function Sidebar({ open, setOpen }) {
           </div>
         </div>
       </Dialog>
-    </header>
+    </div>
   );
 }
