@@ -9,36 +9,36 @@ const SizeSelect = ({
   handleSizeSelect,
   selectedSize,
 }) => {
-  console.log("Selected Size in SizeSelect:", selectedSize); // Debug log
-  console.log("Clothing Type:", clothingType); // Debug log
+  console.log("Selected Size in SizeSelect:", selectedSize);
+  console.log("Clothing Type:", clothingType);
 
-  const sizeData = clothingType === "top" ? top : bottom;
+  const topSizeData =
+    clothingType === "both" || clothingType === "top" ? top : [];
+  const bottomSizeData =
+    clothingType === "both" || clothingType === "bottom" ? bottom : [];
 
   return (
     <div>
-      {clothingType && (
+      {topSizeData.length > 0 && (
         <>
-          <SizeChartData sizeCharts={sizeData} />
-          {sizeData.map((size) => (
-            <div key={size.size} className="flex items-center mb-2">
-              <input
-                type="radio"
-                id={`size-${size.size}`}
-                name="size"
-                value={size.size}
-                onChange={() => handleSizeSelect(clothingType, size.size)}
-                checked={
-                  (clothingType === "top" && size.size === selectedSize.top) ||
-                  (clothingType === "bottom" &&
-                    size.size === selectedSize.bottom)
-                }
-                className="mr-2"
-              />
-              <label htmlFor={`size-${size.size}`} className="text-gray-700">
-                {size.size}
-              </label>
-            </div>
-          ))}
+          <h2 className="text-lg font-semibold mb-4">Select Top Size:</h2>
+          <SizeChartData
+            sizeCharts={topSizeData}
+            handleSizeSelect={(size) => handleSizeSelect("top", size)}
+            selectedSize={selectedSize}
+            clothingType="top"
+          />
+        </>
+      )}
+      {bottomSizeData.length > 0 && (
+        <>
+          <h2 className="text-lg font-semibold mb-4">Select Bottom Size:</h2>
+          <SizeChartData
+            sizeCharts={bottomSizeData}
+            handleSizeSelect={(size) => handleSizeSelect("bottom", size)}
+            selectedSize={selectedSize}
+            clothingType="bottom"
+          />
         </>
       )}
     </div>

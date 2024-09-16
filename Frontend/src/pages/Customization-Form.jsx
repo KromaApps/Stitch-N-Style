@@ -6,6 +6,9 @@ import GenderChange from "../components/CustomForm/GenderChange";
 import OccasionChange from "../components/CustomForm/OccasionChange";
 import Reset from "../components/CustomForm/Reset";
 import SizeSelect from "../components/CustomForm/SizeSelect";
+import FabricTypeChange from "../components/CustomForm/FabricTypeChange";
+import BudgetInput from "../components/CustomForm/BudgetInput";
+import NoteAndFileUpload from "../components/CustomForm/NoteAndFileUpload";
 import Next from "../components/CustomForm/Next";
 import Review from "../components/CustomForm/Review";
 
@@ -15,28 +18,30 @@ const CustomizationForm = () => {
   const [clothingType, setClothingType] = useState("");
   const [occasion, setOccasion] = useState("");
   const [selectedSize, setSelectedSize] = useState({ top: "", bottom: "" });
+  const [fabricType, setFabricType] = useState("");
+  const [budget, setBudget] = useState("");
+  const [note, setNote] = useState("");
+  const [file, setFile] = useState(null);
 
   const handleGenderChange = (event) => setGender(event.target.value);
   const handleClothingTypeChange = (event) =>
     setClothingType(event.target.value);
   const handleOccasionChange = (event) => setOccasion(event.target.value);
+
   const handleSizeSelect = (type, size) => {
-    console.log(`Size selected: ${type} - ${size}`); // Debug log
+    console.log(`Selected Size Type: ${type}, Size: ${size}`); // checking the selected sizes
     setSelectedSize((prev) => ({
       ...prev,
       [type]: size,
     }));
   };
 
-  // In CustomizationForm
+  // checking size changes
   useEffect(() => {
     console.log("Updated Selected Size:", selectedSize);
   }, [selectedSize]);
 
   const handleNext = () => {
-    console.log("Selected size (top):", selectedSize.top);
-    console.log("Selected size (bottom):", selectedSize.bottom);
-
     if (step === 0 && !gender) {
       alert("Please select a gender.");
     } else if (step === 1 && !clothingType) {
@@ -44,27 +49,53 @@ const CustomizationForm = () => {
     } else if (step === 2 && !occasion) {
       alert("Please select an occasion.");
     } else if (step === 3) {
-      if (clothingType.includes("top") && !selectedSize.top) {
+      if (clothingType === "top" && !selectedSize.top) {
         alert("Please select a top size.");
-      } else if (clothingType.includes("bottom") && !selectedSize.bottom) {
+      } else if (clothingType === "bottom" && !selectedSize.bottom) {
         alert("Please select a bottom size.");
+      } else if (clothingType === "both") {
+        if (!selectedSize.top || !selectedSize.bottom) {
+          alert("Please select both top and bottom sizes.");
+        } else {
+          setStep((prevStep) => prevStep + 1);
+        }
       } else {
         setStep((prevStep) => prevStep + 1);
       }
+    } else if (step === 4 && !fabricType) {
+      alert("Please select a fabric type.");
+    } else if (step === 5 && !budget) {
+      alert("Please enter your budget.");
+    } else if (step === 6 && !note) {
+      alert("Please add a note.");
     } else {
       setStep((prevStep) => prevStep + 1);
     }
   };
 
   const handleBack = () => setStep((prevStep) => prevStep - 1);
+
   const handleReset = () => {
     setStep(0);
     setGender("");
     setClothingType("");
     setOccasion("");
     setSelectedSize({ top: "", bottom: "" });
+    setFabricType("");
+    setBudget("");
+    setNote("");
+    setFile(null);
   };
 
+  const handleFabricTypeChange = (event) => setFabricType(event.target.value);
+  const handleBudgetChange = (event) => setBudget(event.target.value);
+  const handleNoteChange = (event) => setNote(event.target.value);
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+  };
+
+  // Size Data
   const getTopSizeData = () => {
     if (gender === "women") return sizeCharts.women.womenTop;
     if (gender === "men") return sizeCharts.men.mensUpperWear;
@@ -82,11 +113,12 @@ const CustomizationForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-6 px-4">
-      <div className="w-full max-w-lg bg-white shadow-md rounded-lg p-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-8 px-4">
+      <div className="w-full max-w-lg bg-white shadow-lg rounded-xl p-6 overflow-hidden">
+        <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
           Customize Your Apparel
         </h1>
+
         <div className="form-steps">
           {step === 0 && (
             <GenderChange
@@ -113,10 +145,30 @@ const CustomizationForm = () => {
               top={getTopSizeData()}
               bottom={getBottomSizeData()}
               handleSizeSelect={handleSizeSelect}
-              selectedSize={selectedSize} // Make sure this is passed
+              selectedSize={selectedSize}
             />
           )}
           {step === 4 && (
+            <FabricTypeChange
+              fabricType={fabricType}
+              handleFabricTypeChange={handleFabricTypeChange}
+            />
+          )}
+          {step === 5 && (
+            <BudgetInput
+              budget={budget}
+              handleBudgetChange={handleBudgetChange}
+            />
+          )}
+          {step === 6 && (
+            <NoteAndFileUpload
+              note={note}
+              file={file}
+              handleNoteChange={handleNoteChange}
+              handleFileChange={handleFileChange}
+            />
+          )}
+          {step === 7 && (
             <Review
               gender={gender}
               clothingType={clothingType}
@@ -126,23 +178,21 @@ const CustomizationForm = () => {
           )}
         </div>
 
-        <div className="mt-6 flex items-center justify-between">
+        <div className="mt-8 flex items-center justify-between">
           {step === 0 ? (
             <div className="flex-grow text-right">
               <Next handleNext={handleNext} />
             </div>
           ) : (
             <>
-              {step > 0 && (
-                <div className="flex-grow text-left">
-                  <Back handleBack={handleBack} />
-                </div>
-              )}
+              <div className="flex-grow text-left">
+                {step > 0 && <Back handleBack={handleBack} />}
+              </div>
               <div className="flex-grow text-center">
                 <Reset handleReset={handleReset} />
               </div>
               <div className="flex-grow text-right">
-                {step < 4 && <Next handleNext={handleNext} />}
+                {step < 7 && <Next handleNext={handleNext} />}
               </div>
             </>
           )}
